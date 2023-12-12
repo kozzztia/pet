@@ -19,10 +19,19 @@ const RouterContainer = () => {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+          headerTitleAlign: 'center',
         }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Games" component={Games} />
-        <Stack.Screen name="List" component={List} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Home'}}
+        />
+        <Stack.Screen
+          name="Games"
+          component={Games}
+          options={{title: 'Games'}}
+        />
+        <Stack.Screen name="List" component={List} options={{title: 'List'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
