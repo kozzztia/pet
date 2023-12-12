@@ -2,22 +2,22 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {Games, HomeScreen, List} from '../screens';
-import {COLORS} from '../styles';
-import {Button, View} from 'react-native';
 import {LoginButton} from '../components/Buttons';
+import {useTheme} from '../providers/ThemeProvider';
 
 const Stack = createStackNavigator();
 
 const RouterContainer = () => {
+  const {navigationThemeColor, titleThemeColor} = useTheme();
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: COLORS.navigationColor,
+            backgroundColor: navigationThemeColor,
           },
-          headerTintColor: COLORS.titleColor,
+          headerTintColor: titleThemeColor,
           headerTitleStyle: {
             fontWeight: 'bold',
           },

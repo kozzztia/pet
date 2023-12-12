@@ -1,15 +1,16 @@
 import * as React from 'react';
-import {View, Button, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+
+import {useTheme} from '../../providers/ThemeProvider';
 import {COLORS} from '../../styles';
 
-const LoginButton = props => {
+const LoginButton: React.FC = () => {
+  const {changeMode} = useTheme();
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => {
-        console.log(props);
-      }}>
-      <Text style={styles.buttonText}>Login</Text>
+      onPress={() => changeMode((prev: any) => !prev)}>
+      <Text style={styles.buttonText}>dark</Text>
     </TouchableOpacity>
   );
 };
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    color: COLORS.titleColor,
+    color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
   },
