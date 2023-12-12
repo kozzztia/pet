@@ -1,7 +1,6 @@
 export const COLORS = {
-  darkBackground: '#0b5351',
-  lightBackground: '#00a9a5',
-  darkColor: '#fff',
-  lightColor: '#eee',
-  mainColor: '#092327',
+  backgroundColor: '#e0e2db',
+  navigationColor: '#333333',
+  titleColor: '#fcfaf9',
+  decorColor: '#48e5c2',
 };

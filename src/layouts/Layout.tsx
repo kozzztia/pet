@@ -2,14 +2,16 @@ import React from 'react';
 import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {COLORS, SIZES} from '../styles';
 
-const Layout: React.FC<{
+type LayoutProps = {
   children: React.ReactNode;
-}> = ({children}) => {
+};
+
+const Layout: React.FC<LayoutProps> = ({children}) => {
   return (
     <SafeAreaView style={[styles.layout]}>
       <StatusBar
         barStyle={'dark-content'}
-        backgroundColor={COLORS.darkBackground}
+        backgroundColor={COLORS.backgroundColor}
         showHideTransition={'fade'}
         animated={false}
       />
@@ -23,7 +25,7 @@ export default Layout;
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    backgroundColor: COLORS.mainColor,
+    backgroundColor: COLORS.backgroundColor,
   },
   container: {
     padding: SIZES.mainPadding,

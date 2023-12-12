@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Layout} from '.';
+import {Layout} from '../layouts';
 
 const List: React.FC = () => {
   return (

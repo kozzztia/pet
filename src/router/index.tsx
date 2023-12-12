@@ -13,9 +13,9 @@ const RouterContainer = () => {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: COLORS.darkBackground,
+            backgroundColor: COLORS.navigationColor,
           },
-          headerTintColor: COLORS.darkColor,
+          headerTintColor: COLORS.titleColor,
           headerTitleStyle: {
             fontWeight: 'bold',
           },
