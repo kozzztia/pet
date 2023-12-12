@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {Games, HomeScreen, List} from '../screens';
 import {COLORS} from '../styles';
+import {Button, View} from 'react-native';
+import {LoginButton} from '../components/Buttons';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,10 @@ const RouterContainer = () => {
             fontWeight: 'bold',
           },
           headerTitleAlign: 'center',
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+          headerRight: props => {
+            return LoginButton(props);
+          },
         }}>
         <Stack.Screen
           name="Home"
