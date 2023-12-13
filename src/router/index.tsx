@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {Games, HomeScreen, List} from '../screens';
 import {LoginButton} from '../components/Buttons';
 import {useTheme} from '../providers/ThemeProvider';
@@ -14,18 +14,37 @@ const RouterContainer = () => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
+          cardStyle: {backgroundColor: navigationThemeColor},
           headerStyle: {
             backgroundColor: navigationThemeColor,
           },
           headerTintColor: titleThemeColor,
           headerTitleStyle: {
             fontWeight: 'bold',
+            color: titleThemeColor,
           },
           headerTitleAlign: 'center',
-          ...TransitionPresets.ModalSlideFromBottomIOS,
+          // ...TransitionPresets.ModalSlideFromBottomIOS,
+          animationEnabled: false,
           headerRight: props => {
             return LoginButton(props);
           },
+          // cardStyleInterpolator: ({current, layouts}) => {
+          //   const translateY = current.progress.interpolate({
+          //     inputRange: [0, 1],
+          //     outputRange: [layouts.screen.height, 0],
+          //   });
+
+          //   return {
+          //     cardStyle: {
+          //       transform: [
+          //         {
+          //           translateY,
+          //         },
+          //       ],
+          //     },
+          //   };
+          // },
         }}>
         <Stack.Screen
           name="Home"

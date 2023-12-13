@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
   return (
     <SafeAreaView style={[styles.layout]}>
       <StatusBar
-        barStyle={dark ? 'dark-content' : 'light-content'}
+        barStyle={!dark ? 'dark-content' : 'light-content'}
         backgroundColor={backgroundThemeColor}
         showHideTransition={'fade'}
         animated={false}

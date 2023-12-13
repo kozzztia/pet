@@ -5,12 +5,12 @@ import {useTheme} from '../../providers/ThemeProvider';
 import {COLORS} from '../../styles';
 
 const LoginButton: React.FC = () => {
-  const {changeMode} = useTheme();
+  const {changeMode, dark} = useTheme();
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => changeMode((prev: any) => !prev)}>
-      <Text style={styles.buttonText}>dark</Text>
+      onPress={() => changeMode((prev: boolean) => !prev)}>
+      <Text style={styles.buttonText}>{dark ? 'dark' : 'light'}</Text>
     </TouchableOpacity>
   );
 };
