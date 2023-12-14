@@ -19,7 +19,7 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({children}) => {
   const {backgroundThemeColor, titleThemeColor, dark} = useTheme();
-  const {storedValue, saveValue} = useAsyncStorage();
+  const {storedValue, saveValue, clearStorage} = useAsyncStorage();
   const [inputValue, setInputValue] = React.useState('');
   return (
     <SafeAreaView style={[styles.layout]}>
@@ -40,7 +40,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
           placeholderTextColor={titleThemeColor}
         />
         <Button title="Save Value" onPress={() => saveValue(inputValue)} />
-        <Button title="RESET" onPress={() => saveValue('')} />
+        <Button title="RESET" onPress={() => clearStorage()} />
       </View>
       <ScrollView
         style={[styles.container, {backgroundColor: backgroundThemeColor}]}>

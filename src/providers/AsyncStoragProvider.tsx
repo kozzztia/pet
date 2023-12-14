@@ -8,6 +8,7 @@ interface AsyncStorageContextProps {
 interface AsyncStorageContextType {
   storedValue: string | null;
   saveValue: (value: string) => Promise<void>;
+  clearStorage: () => Promise<void>;
 }
 
 const AsyncStorageContext = createContext<AsyncStorageContextType | undefined>(
@@ -52,9 +53,18 @@ export const AsyncStorageProvider: React.FC<AsyncStorageContextProps> = ({
     }
   };
 
+  const clearStorage = async () => {
+    try {
+      await AsyncStorage.removeItem('myKey');
+    } catch (error) {
+      console.error('Error remove data:', error);
+    }
+  };
+
   const contextValue: AsyncStorageContextType = {
     storedValue,
     saveValue,
+    clearStorage,
   };
 
   return (
