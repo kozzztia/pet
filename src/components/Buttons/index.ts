@@ -1,3 +1,4 @@
-import LoginButton from './LoginButton';
+import ThemeButton from './ThemeButton';
+import CustomButton from './CustomButton';
 
-export {LoginButton};
+export {ThemeButton, CustomButton};

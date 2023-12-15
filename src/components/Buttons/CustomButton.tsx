@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-import {useTheme} from '../../providers/ThemeProvider';
 import {COLORS} from '../../styles';
 
-const LoginButton: React.FC = () => {
-  const {changeMode, dark} = useTheme();
+type buttonProps = {
+  title: string;
+  handler: () => void;
+};
+
+const CustomButton: React.FC<buttonProps> = ({title, handler}) => {
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => changeMode((prev: boolean) => !prev)}>
-      <Text style={styles.buttonText}>{dark ? 'dark' : 'light'}</Text>
+    <TouchableOpacity style={styles.button} onPress={handler}>
+      <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-export default LoginButton;
+export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {

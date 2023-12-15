@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useTheme} from '../../providers/ThemeProvider';
-import {COLORS, SIZES} from '../../styles';
 import {GreatingInput} from '../Inputs';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {dictionary} from '../../consts/dictionary';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CustomButton} from '../Buttons';
+import {Title} from '../Text';
+import {SIZES} from '../../styles';
 
 const GreatingContainer = () => {
-  const {titleThemeColor} = useTheme();
+  const {backgroundThemeColor} = useTheme();
   const {greating} = dictionary;
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -36,8 +37,8 @@ const GreatingContainer = () => {
 
   return (
     <>
-      <View style={[styles.container, {backgroundColor: COLORS.decorColor}]}>
-        {userName && <Text>{userName}</Text>}
+      <View style={[styles.container, {backgroundColor: backgroundThemeColor}]}>
+        {userName && <Title title={userName} />}
         {!userName && (
           <GreatingInput
             value={inputValue}
@@ -46,16 +47,15 @@ const GreatingContainer = () => {
           />
         )}
         {!userName && (
-          <Button
+          <CustomButton
             title={greating.button}
-            onPress={() => greatingHandler(inputValue)}
+            handler={() => greatingHandler(inputValue)}
           />
         )}
-
         {userName && (
-          <Button
+          <CustomButton
             title={greating.clear}
-            onPress={() => clearNameFromStorage()}
+            handler={() => clearNameFromStorage()}
           />
         )}
       </View>

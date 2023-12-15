@@ -1,6 +1,6 @@
 export const SIZES = {
   mainSize: 18,
-  TitleSize: 25,
+  titleSize: 25,
   btnWidth: 20,
   mainPadding: 5,
 };
