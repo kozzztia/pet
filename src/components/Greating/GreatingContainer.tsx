@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {GreatingInput} from '../Inputs';
+import {StyleSheet} from 'react-native';
+import {GreatingInput} from '../ui/Inputs';
 import {dictionary} from '../../consts/dictionary';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {CustomButton} from '../Buttons';
-import {Title} from '../Text';
+import {CustomButton} from '../ui/Buttons';
+import {Title} from '../ui/Text';
+import {ViewContainer} from '../ui/Containers';
 
 const GreatingContainer = () => {
   const {greating} = dictionary;
@@ -34,36 +35,31 @@ const GreatingContainer = () => {
   }, []);
 
   return userName ? (
-    <View style={styles.container}>
+    <ViewContainer row>
       <Title title={`${greating.message} ${userName}`} />
       <CustomButton
         style={styles.button}
         title={greating.clear}
         handler={() => clearNameFromStorage()}
       />
-    </View>
+    </ViewContainer>
   ) : (
-    <View style={styles.container}>
+    <ViewContainer row>
       <GreatingInput
         value={inputValue}
         setValue={setInputValue}
         title={greating.placeHolder}
       />
       <CustomButton
+        style={styles.button}
         title={greating.button}
         handler={() => greatingHandler(inputValue)}
       />
-    </View>
+    </ViewContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 50,
-  },
   button: {
     marginLeft: 'auto',
   },

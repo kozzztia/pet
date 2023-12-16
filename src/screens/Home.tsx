@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {Layout} from '../layouts';
 import {ScreenNavigationProp} from '../types/type';
-import {ViewContainer} from '../components/Containers';
+import {ViewContainer} from '../components/ui/Containers';
 
 type HomeScreenProps = {
   navigation: ScreenNavigationProp;

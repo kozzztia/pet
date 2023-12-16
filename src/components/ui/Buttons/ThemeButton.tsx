@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useTheme} from '../../providers/ThemeProvider';
+import {useTheme} from '../../../providers/ThemeProvider';
 import CustomButton from './CustomButton';
 
 const ThemeButton: React.FC = () => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import {useTheme} from '../../providers/ThemeProvider';
-import {SIZES} from '../../styles';
+import {useTheme} from '../../../providers/ThemeProvider';
+import {SIZES} from '../../../styles';
 
 type titleProps = {
   title: string;
@@ -18,5 +18,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: SIZES.titleSize,
     textAlign: 'center',
+    padding: SIZES.mainPadding,
+    textTransform: 'capitalize',
   },
 });

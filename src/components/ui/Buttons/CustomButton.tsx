@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {COLORS} from '../../styles';
+import {COLORS, SIZES} from '../../../styles';
 
 type buttonProps = {
   title: string;
@@ -28,8 +28,9 @@ export default CustomButton;
 const styles = StyleSheet.create({
   button: {
     backgroundColor: COLORS.decorColor,
-    padding: 5,
-    borderRadius: 5,
+    padding: SIZES.mainPadding,
+    borderRadius: SIZES.radius,
+    minWidth: SIZES.minBtnWidth,
   },
   buttonText: {
     color: '#fff',

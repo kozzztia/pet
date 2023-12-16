@@ -2,8 +2,9 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Games, HomeScreen, List} from '../screens';
-import {ThemeButton} from '../components/Buttons';
+import {ThemeButton} from '../components/ui/Buttons';
 import {useTheme} from '../providers/ThemeProvider';
+import {SIZES} from '../styles';
 
 const Stack = createStackNavigator();
 
@@ -14,37 +15,24 @@ const RouterContainer = () => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          cardStyle: {backgroundColor: navigationThemeColor},
+          cardStyle: {
+            backgroundColor: navigationThemeColor,
+          },
           headerStyle: {
             backgroundColor: navigationThemeColor,
+            height: SIZES.minComtainerHeight,
           },
           headerTintColor: titleThemeColor,
           headerTitleStyle: {
             fontWeight: 'bold',
             color: titleThemeColor,
+            marginRight: 'auto',
           },
           headerTitleAlign: 'center',
-          // ...TransitionPresets.ModalSlideFromBottomIOS,
           animationEnabled: false,
           headerRight: props => {
             return ThemeButton(props);
           },
-          // cardStyleInterpolator: ({current, layouts}) => {
-          //   const translateY = current.progress.interpolate({
-          //     inputRange: [0, 1],
-          //     outputRange: [layouts.screen.height, 0],
-          //   });
-
-          //   return {
-          //     cardStyle: {
-          //       transform: [
-          //         {
-          //           translateY,
-          //         },
-          //       ],
-          //     },
-          //   };
-          // },
         }}>
         <Stack.Screen
           name="Home"
