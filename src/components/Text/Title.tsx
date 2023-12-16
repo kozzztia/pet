@@ -17,5 +17,6 @@ export default Title;
 const styles = StyleSheet.create({
   title: {
     fontSize: SIZES.titleSize,
+    textAlign: 'center',
   },
 });

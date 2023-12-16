@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {Layout} from '../layouts';
 import {ScreenNavigationProp} from '../types/type';
+import {ViewContainer} from '../components/Containers';
 
 type HomeScreenProps = {
   navigation: ScreenNavigationProp;
@@ -10,7 +11,7 @@ type HomeScreenProps = {
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <Layout>
-      <View style={styles.box}>
+      <ViewContainer>
         <Text>Home Screen</Text>
         <Button
           title="Go to List"
@@ -20,17 +21,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           title="Go to Games"
           onPress={() => navigation.navigate('Games')}
         />
-      </View>
+      </ViewContainer>
     </Layout>
   );
 };
-
-const styles = StyleSheet.create({
-  box: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default HomeScreen;

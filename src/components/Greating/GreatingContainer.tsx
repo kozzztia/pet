@@ -1,23 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useTheme} from '../../providers/ThemeProvider';
 import {GreatingInput} from '../Inputs';
 import {dictionary} from '../../consts/dictionary';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CustomButton} from '../Buttons';
 import {Title} from '../Text';
-import {SIZES} from '../../styles';
 
 const GreatingContainer = () => {
-  const {backgroundThemeColor} = useTheme();
   const {greating} = dictionary;
 
   const [inputValue, setInputValue] = useState<string>('');
   const [userName, setUserName] = useState<string | null>(null);
 
   const greatingHandler = async (value: string) => {
+    const name = value.trim();
     setUserName(inputValue);
-    AsyncStorage.setItem('name', value);
+    AsyncStorage.setItem('name', name);
     setInputValue('');
   };
 
@@ -35,42 +33,40 @@ const GreatingContainer = () => {
     getNameFromStorage().then(name => setUserName(name));
   }, []);
 
-  return (
-    <>
-      <View style={[styles.container, {backgroundColor: backgroundThemeColor}]}>
-        {userName && <Title title={userName} />}
-        {!userName && (
-          <GreatingInput
-            value={inputValue}
-            setValue={setInputValue}
-            title={greating.placeHolder}
-          />
-        )}
-        {!userName && (
-          <CustomButton
-            title={greating.button}
-            handler={() => greatingHandler(inputValue)}
-          />
-        )}
-        {userName && (
-          <CustomButton
-            title={greating.clear}
-            handler={() => clearNameFromStorage()}
-          />
-        )}
-      </View>
-    </>
+  return userName ? (
+    <View style={styles.container}>
+      <Title title={`${greating.message} ${userName}`} />
+      <CustomButton
+        style={styles.button}
+        title={greating.clear}
+        handler={() => clearNameFromStorage()}
+      />
+    </View>
+  ) : (
+    <View style={styles.container}>
+      <GreatingInput
+        value={inputValue}
+        setValue={setInputValue}
+        title={greating.placeHolder}
+      />
+      <CustomButton
+        title={greating.button}
+        handler={() => greatingHandler(inputValue)}
+      />
+    </View>
   );
 };
 
-export default GreatingContainer;
-
 const styles = StyleSheet.create({
   container: {
-    padding: SIZES.mainPadding,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 50,
   },
-  title: {
-    textAlign: 'center',
+  button: {
+    marginLeft: 'auto',
   },
 });
+
+export default GreatingContainer;

@@ -7,6 +7,7 @@ export const dictionary = {
     dark: 'dark',
   },
   greating: {
+    message: 'hello :',
     placeHolder: 'insert your name',
     button: 'Ok',
     clear: 'clear',

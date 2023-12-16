@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import {useTheme} from '../../providers/ThemeProvider';
+import {COLORS, SIZES} from '../../styles';
 
 type GreatingInputType = {
   title: string;
@@ -13,11 +15,14 @@ const GreatingInput: React.FC<GreatingInputType> = ({
   setValue,
   title,
 }) => {
+  const {titleThemeColor} = useTheme();
   return (
     <TextInput
-      style={styles.input}
+      style={{...styles.input, color: titleThemeColor}}
       placeholder={title}
+      placeholderTextColor={titleThemeColor}
       value={value}
+      selectionColor={COLORS.decorColor}
       onChangeText={text => setValue(text)}
     />
   );
@@ -27,6 +32,6 @@ export default GreatingInput;
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#fff',
+    fontSize: SIZES.mainSize,
   },
 });
