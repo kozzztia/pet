@@ -17,8 +17,9 @@ export default Title;
 const styles = StyleSheet.create({
   title: {
     fontSize: SIZES.titleSize,
-    textAlign: 'center',
+    textAlign: 'left',
     padding: SIZES.mainPadding,
     textTransform: 'capitalize',
+    flex: 1,
   },
 });

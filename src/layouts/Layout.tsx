@@ -16,7 +16,6 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
         backgroundColor={backgroundThemeColor}
         animated={false}
       />
-      <Greating />
       <ScrollView
         style={[styles.container, {backgroundColor: backgroundThemeColor}]}>
         {children}

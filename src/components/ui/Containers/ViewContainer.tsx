@@ -5,7 +5,7 @@ import {SIZES} from '../../../styles';
 
 type ViewContainerTypes = {
   children: React.ReactNode;
-  row: boolean;
+  row?: boolean;
 };
 
 const ViewContainer: React.FC<ViewContainerTypes> = ({

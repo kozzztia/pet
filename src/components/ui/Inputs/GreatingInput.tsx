@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     flex: 1,
     textAlign: 'left',
-    height: 50,
+    height: SIZES.minComtainerHeight,
   },
 });

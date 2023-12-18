@@ -8,7 +8,7 @@ export const dictionary = {
   },
   greating: {
     message: 'Hello :',
-    placeHolder: 'Insert your name',
+    placeHolder: 'Tab to insert your name',
     button: 'Ok',
     clear: 'clear',
   },
