@@ -1,5 +1,5 @@
-import Games from './Games';
+import GameScreen from './Game';
 import HomeScreen from './Home';
-import List from './List';
+import DefaultScreen from './Default';
 
-export {HomeScreen, Games, List};
+export {HomeScreen, GameScreen, DefaultScreen};

@@ -1,18 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Layout} from '../layouts';
 
-const List: React.FC = () => {
+const GameScreen: React.FC = () => {
   return (
     <Layout>
       <View style={styles.box}>
-        <Text>Details</Text>
+        <Text>game number</Text>
       </View>
     </Layout>
   );
 };
 
-export default List;
+export default GameScreen;
 
 const styles = StyleSheet.create({
   box: {

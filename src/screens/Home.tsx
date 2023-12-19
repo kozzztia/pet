@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text, Button} from 'react-native';
 import {Layout} from '../layouts';
 import {ScreenNavigationProp} from '../types/type';
 import {ViewContainer} from '../components/ui/Containers';
@@ -15,21 +14,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     <Layout>
       <ViewContainer>
         <GreatingContainer />
-        {/* <Button
-          title="Go to List"
-          onPress={() => navigation.navigate('List')}
-        /> */}
         <CustomButton
-          handler={() => navigation.navigate('List')}
-          title={'go to list'}
+          handler={() => navigation.navigate('game')}
+          title={'Go to Game'}
         />
-        {/* <Button
-          title="Go to Games"
-          onPress={() => navigation.navigate('Games')}
-        /> */}
         <CustomButton
-          handler={() => navigation.navigate('Games')}
-          title={'Go to Games'}
+          handler={() => navigation.navigate('default')}
+          title={'default'}
         />
       </ViewContainer>
     </Layout>

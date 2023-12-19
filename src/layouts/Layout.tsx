@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {useTheme} from '../providers/ThemeProvider';
-import Greating from '../components/Greating/GreatingContainer';
 
 type LayoutProps = {
   children: React.ReactNode;

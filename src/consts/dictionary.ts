@@ -1,6 +1,8 @@
 export const dictionary = {
-  home: {
-    title: 'Home',
+  screens: {
+    homeTitle: 'Home',
+    gameTitle: 'Game',
+    defaultTitle: 'Default',
   },
   theme: {
     light: 'light',
