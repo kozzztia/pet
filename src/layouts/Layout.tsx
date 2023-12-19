@@ -15,10 +15,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
         backgroundColor={backgroundThemeColor}
         animated={false}
       />
-      <ScrollView
-        style={[styles.container, {backgroundColor: backgroundThemeColor}]}>
-        {children}
-      </ScrollView>
+      {children}
     </SafeAreaView>
   );
 };
@@ -27,9 +24,6 @@ export default Layout;
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
-  },
-  container: {
     flex: 1,
   },
 });

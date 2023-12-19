@@ -1,12 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {Layout} from '../layouts';
+import {Title} from '../components/ui/Text';
+import {dictionary} from '../consts/dictionary';
+import { ViewContainer } from '../components/ui/Containers';
 
 const DefaultScreen: React.FC = () => {
+  const {defaultTitle} = dictionary.screens;
   return (
     <Layout>
-      <View style={styles.box}>
-        <Text>Details</Text>
+      <View style={styles.container}>
+        <ViewContainer>
+          <Title title={defaultTitle} />
+        </ViewContainer>
+        <View style={styles.image}>
+          <Image source={require('../assets/start.gif')} style={styles.gif} />
+        </View>
       </View>
     </Layout>
   );
@@ -15,9 +24,15 @@ const DefaultScreen: React.FC = () => {
 export default DefaultScreen;
 
 const styles = StyleSheet.create({
-  box: {
+  container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+  },
+  gif: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'scale-down',
   },
 });

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Layout} from '../layouts';
 import {ScreenNavigationProp} from '../types/type';
-import {ViewContainer} from '../components/ui/Containers';
-import GreatingContainer from '../components/Greating/GreatingContainer';
 import {CustomButton} from '../components/ui/Buttons';
+import GreatingContainer from '../components/Greating/GreatingContainer';
+import {ScrollView} from 'react-native-gesture-handler';
 
 type HomeScreenProps = {
   navigation: ScreenNavigationProp;
@@ -12,7 +12,7 @@ type HomeScreenProps = {
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <Layout>
-      <ViewContainer>
+      <ScrollView>
         <GreatingContainer />
         <CustomButton
           handler={() => navigation.navigate('game')}
@@ -22,7 +22,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           handler={() => navigation.navigate('default')}
           title={'default'}
         />
-      </ViewContainer>
+      </ScrollView>
     </Layout>
   );
 };

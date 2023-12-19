@@ -1,23 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {Layout} from '../layouts';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const GameScreen: React.FC = () => {
   return (
     <Layout>
-      <View style={styles.box}>
-        <Text>game number</Text>
-      </View>
+      <ScrollView>
+        <Text>game number</Text>\
+      </ScrollView>
     </Layout>
   );
 };
 
 export default GameScreen;
-
-const styles = StyleSheet.create({
-  box: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
