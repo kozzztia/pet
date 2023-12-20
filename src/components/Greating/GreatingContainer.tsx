@@ -10,28 +10,36 @@ import {
   setNameToStorage,
 } from '../../utils/storageUtils';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {setName} from '../../store/userSlice';
+import {RootState} from '../../store';
+
 const GreatingContainer = () => {
   const {greating} = dictionary;
   const [inputValue, setInputValue] = useState<string>('');
-  const [userName, setUserName] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
   const greatingHandler = (value: string) => {
     const name = value.trim();
     setNameToStorage(name);
-    setUserName(inputValue);
+    dispatch(setName(name));
     setInputValue('');
   };
 
+  const userName = useSelector((state: RootState) => state.user.name);
+
   useEffect(() => {
-    getNameFromStorage().then(name => setUserName(name));
-  }, []);
+    getNameFromStorage().then(name => dispatch(setName(name)));
+  }, [dispatch]);
 
   return userName ? (
     <ViewContainer row>
       <Title title={`${greating.message} ${userName}`} />
       <CustomButton
         title={greating.clear}
-        handler={() => clearNameFromStorage().then(() => setUserName(null))}
+        handler={() =>
+          clearNameFromStorage().then(() => dispatch(setName(null)))
+        }
       />
     </ViewContainer>
   ) : (
