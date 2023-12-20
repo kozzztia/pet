@@ -1,15 +1,18 @@
 import * as React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleProp, StyleSheet, Text, ViewStyle} from 'react-native';
 import {useTheme} from '../../../providers/ThemeProvider';
 import {SIZES} from '../../../styles';
 
 type titleProps = {
   title: string;
+  style?: StyleProp<ViewStyle>;
 };
 
-const Title: React.FC<titleProps> = ({title}) => {
+const Title: React.FC<titleProps> = ({title, style}) => {
   const {titleThemeColor} = useTheme();
-  return <Text style={{...styles.title, color: titleThemeColor}}>{title}</Text>;
+  return (
+    <Text style={[styles.title, style, {color: titleThemeColor}]}>{title}</Text>
+  );
 };
 
 export default Title;
@@ -20,6 +23,5 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     padding: SIZES.mainPadding,
     textTransform: 'capitalize',
-    flex: 1,
   },
 });

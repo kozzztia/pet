@@ -14,4 +14,7 @@ export const dictionary = {
     button: 'Ok',
     clear: 'clear',
   },
+  default: {
+    message: 'please, insert your name to play',
+  },
 };

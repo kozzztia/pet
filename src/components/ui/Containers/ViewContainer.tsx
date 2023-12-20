@@ -28,7 +28,7 @@ export default ViewContainer;
 const styles = StyleSheet.create({
   box: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     minHeight: SIZES.minComtainerHeight,
     gap: SIZES.gap,
   },

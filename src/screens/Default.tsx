@@ -3,19 +3,22 @@ import {View, StyleSheet, Image} from 'react-native';
 import {Layout} from '../layouts';
 import {Title} from '../components/ui/Text';
 import {dictionary} from '../consts/dictionary';
-import { ViewContainer } from '../components/ui/Containers';
+import {useTheme} from '../providers/ThemeProvider';
 
 const DefaultScreen: React.FC = () => {
-  const {defaultTitle} = dictionary.screens;
+  const {message} = dictionary.default;
+  const {backgroundThemeColor} = useTheme();
   return (
     <Layout>
-      <View style={styles.container}>
-        <ViewContainer>
-          <Title title={defaultTitle} />
-        </ViewContainer>
+      <View
+        style={{...styles.container, backgroundColor: backgroundThemeColor}}>
         <View style={styles.image}>
-          <Image source={require('../assets/start.gif')} style={styles.gif} />
+          <Image
+            source={require('../assets/image/start.png')}
+            style={styles.start}
+          />
         </View>
+        <Title title={message} style={styles.title} />
       </View>
     </Layout>
   );
@@ -30,9 +33,15 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
-  gif: {
+  title: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+  start: {
+    flex: 1,
     width: '100%',
     height: '100%',
-    objectFit: 'scale-down',
+    objectFit: 'contain',
   },
 });
