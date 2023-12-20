@@ -22,6 +22,5 @@ const styles = StyleSheet.create({
     fontSize: SIZES.titleSize,
     textAlign: 'left',
     padding: SIZES.mainPadding,
-    textTransform: 'capitalize',
   },
 });

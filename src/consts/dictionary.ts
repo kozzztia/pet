@@ -12,9 +12,9 @@ export const dictionary = {
     message: 'Hello :',
     placeHolder: 'Tab to insert your name',
     button: 'Ok',
-    clear: 'clear',
+    clear: 'Clear',
   },
   default: {
-    message: 'please, insert your name to play',
+    message: 'Please, insert your name to play',
   },
 };

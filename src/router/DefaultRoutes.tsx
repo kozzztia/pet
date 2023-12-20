@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {useTheme} from '../providers/ThemeProvider';
-import {dictionary} from '../consts/dictionary';
 import {SIZES} from '../styles';
 import {ThemeButton} from '../components/ui/Buttons';
 import {paths} from '../consts/paths';
@@ -11,7 +10,6 @@ const Stack = createStackNavigator();
 
 const DefaultRoutes = () => {
   const {navigationThemeColor, titleThemeColor} = useTheme();
-  const {defaultTitle} = dictionary.screens;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -37,7 +35,7 @@ const DefaultRoutes = () => {
       <Stack.Screen
         name={paths.DEFAULT_SCREEN}
         component={DefaultScreen}
-        options={{title: defaultTitle}}
+        options={{title: paths.DEFAULT_SCREEN}}
       />
     </Stack.Navigator>
   );

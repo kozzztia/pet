@@ -1,5 +1,5 @@
 export const paths = {
-  HOME_SCREEN: 'home',
-  GAME_SCREEN: 'game',
-  DEFAULT_SCREEN: 'default',
+  HOME_SCREEN: 'Home',
+  GAME_SCREEN: 'Game',
+  DEFAULT_SCREEN: 'Default',
 };
