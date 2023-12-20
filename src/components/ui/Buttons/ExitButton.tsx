@@ -1,10 +1,8 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 const ExitButton: React.FC = () => {
   const handleExit = () => {
-    // You can perform any exit logic here
-    // For example, you might want to show a confirmation dialog
     Alert.alert(
       'Exit App',
       'Are you sure you want to exit?',

@@ -1,9 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {GreatingInput} from '../ui/Inputs';
-import {dictionary} from '../../consts/dictionary';
-import {CustomButton} from '../ui/Buttons';
-import {Title} from '../ui/Text';
-import {ViewContainer} from '../ui/Containers';
 import {
   clearNameFromStorage,
   getNameFromStorage,
@@ -13,11 +8,13 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {setName} from '../../store/userSlice';
 import {RootState} from '../../store';
+import UserContainer from './UserContainer';
+import NoUserContainer from './NoUserContainer';
 
 const GreatingContainer = () => {
-  const {greating} = dictionary;
   const [inputValue, setInputValue] = useState<string>('');
   const dispatch = useDispatch();
+  const userName = useSelector((state: RootState) => state.user.name);
 
   const greatingHandler = (value: string) => {
     const name = value.trim();
@@ -26,34 +23,22 @@ const GreatingContainer = () => {
     setInputValue('');
   };
 
-  const userName = useSelector((state: RootState) => state.user.name);
+  const clearHandler = () => {
+    clearNameFromStorage().then(() => dispatch(setName(null)));
+  };
 
   useEffect(() => {
     getNameFromStorage().then(name => dispatch(setName(name)));
   }, [dispatch]);
 
   return userName ? (
-    <ViewContainer row>
-      <Title title={`${greating.message} ${userName}`} />
-      <CustomButton
-        title={greating.clear}
-        handler={() =>
-          clearNameFromStorage().then(() => dispatch(setName(null)))
-        }
-      />
-    </ViewContainer>
+    <UserContainer handler={() => clearHandler()} name={userName} />
   ) : (
-    <ViewContainer row>
-      <GreatingInput
-        value={inputValue}
-        setValue={setInputValue}
-        title={greating.placeHolder}
-      />
-      <CustomButton
-        title={greating.button}
-        handler={() => greatingHandler(inputValue)}
-      />
-    </ViewContainer>
+    <NoUserContainer
+      value={inputValue}
+      setValue={setInputValue}
+      handler={() => greatingHandler(inputValue)}
+    />
   );
 };
 
