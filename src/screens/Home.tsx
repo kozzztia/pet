@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import {Layout} from '../layouts';
-import {ScreenNavigationProp} from '../types/type';
+import {ScreenNavigationProp} from '../types/navigationsType';
 import {CustomButton} from '../components/ui/Buttons';
 import useSWR from 'swr';
 import {Text} from 'react-native';
@@ -36,10 +36,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   }
   return (
     <Layout>
-      {/* <CustomButton
+      <CustomButton
         handler={() => navigation.navigate('Game')}
         title={'Go to Game'}
-      /> */}
+      />
       {data.map((item: Location) => (
         <Text key={item.id}>{item.name}</Text>
       ))}
