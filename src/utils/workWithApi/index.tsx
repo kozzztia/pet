@@ -1,10 +1,12 @@
 import axios from 'axios';
-import {locationType} from '../../types/locationsTypes';
+import {LocationsState} from '../../store/locationsSlice';
 
-export const GetLocations = async (point: string): Promise<locationType[]> => {
+export const GetLocations = async (point: string): Promise<LocationsState> => {
   try {
     const res = await axios.get(point);
-    return res.data.results;
+    const locations = res.data.results;
+    const nextPage = res.data.info.next;
+    return {locations, nextPage};
   } catch (error) {
     throw error;
   }
