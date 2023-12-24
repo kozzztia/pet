@@ -1,48 +1,43 @@
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Layout} from '../layouts';
 import {ScreenNavigationProp} from '../types/navigationsType';
 import {CustomButton} from '../components/ui/Buttons';
-import useSWR from 'swr';
-import {Text} from 'react-native';
+import {GetLocations} from '../utils/workWithApi';
+import {locationType} from '../types/locationsTypes';
+import {FlatList, Text} from 'react-native';
+import {setLocationsToRedux} from '../store/locationsSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 type HomeScreenProps = {
   navigation: ScreenNavigationProp;
 };
 
-type Location = {
-  created: string;
-  dimension: string;
-  id: number;
-  name: string;
-  residents: string[]; // Assuming an array of strings for residents, you can adjust this based on the actual structure
-  type: string;
-  url: string;
-};
-
-const fetcher = (url: string | URL | Request) =>
-  fetch(url)
-    .then(res => res.json())
-    .then(data => data.results);
-
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const api = 'https://rickandmortyapi.com/api/location';
-  const {data, error} = useSWR(api, fetcher);
-  if (error) {
-    return <Text>Error loading data</Text>;
-  }
-
-  if (!data) {
-    return <Text>Loading...</Text>;
-  }
+  const dispatch = useDispatch();
+  const locations = useSelector(
+    (state: RootState) => state.locations.locations,
+  );
+  useLayoutEffect(() => {
+    GetLocations('https://rickandmortyapi.com/api/location?page=1').then(res =>
+      dispatch(setLocationsToRedux(res)),
+    );
+  }, [dispatch]);
   return (
     <Layout>
       <CustomButton
         handler={() => navigation.navigate('Game')}
         title={'Go to Game'}
       />
-      {data.map((item: Location) => (
-        <Text key={item.id}>{item.name}</Text>
-      ))}
+      {locations && (
+        <FlatList
+          data={locations}
+          renderItem={({item}) => <Text>{item.name}</Text>}
+          keyExtractor={item => item.id.toString()}
+          // onEndReached={loadMoreData}
+          // onEndReachedThreshold={0.1}
+        />
+      )}
     </Layout>
   );
 };

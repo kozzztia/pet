@@ -1,39 +1,34 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {infoType, locationType} from '../types/locationsTypes';
+import {locationType} from '../types/locationsTypes';
 
 interface LocationsState {
   locations: locationType[];
-  info: infoType;
+  nextPage: string | null;
 }
 
 const initialState: LocationsState = {
   locations: [],
-  info: {
-    count: 0,
-    pages: 0,
-    next: '',
-    prev: null,
-  },
+  nextPage: null,
 };
 
 const locationsSlice = createSlice({
   name: 'locationsValue',
   initialState,
   reducers: {
-    setLocations: (state, action: PayloadAction<locationType[]>) => {
+    setLocationsToRedux: (state, action: PayloadAction<locationType[]>) => {
       return {
         ...state,
-        locations: action.payload,
+        locations: [...state.locations, ...action.payload],
       };
     },
-    setInfo: (state, action: PayloadAction<infoType>) => {
+    setNextPageToRedux: (state, action: PayloadAction<string>) => {
       return {
         ...state,
-        info: action.payload,
+        nextPage: action.payload,
       };
     },
   },
 });
 
-export const {setLocations} = locationsSlice.actions;
+export const {setLocationsToRedux, setNextPageToRedux} = locationsSlice.actions;
 export default locationsSlice.reducer;

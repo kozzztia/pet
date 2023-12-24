@@ -7,10 +7,3 @@ export type locationType = {
   type: string;
   url: string;
 };
-
-export type infoType = {
-  count: number;
-  pages: number;
-  next: string;
-  prev: null;
-};

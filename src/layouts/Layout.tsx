@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {useTheme} from '../providers/ThemeProvider';
 import GreatingContainer from '../components/Greating';
 
@@ -10,18 +10,15 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({children}) => {
   const {backgroundThemeColor, dark} = useTheme();
   return (
-    <SafeAreaView style={[styles.layout]}>
+    <SafeAreaView
+      style={{...styles.layout, backgroundColor: backgroundThemeColor}}>
       <StatusBar
         barStyle={!dark ? 'dark-content' : 'light-content'}
         backgroundColor={backgroundThemeColor}
         // animated={false}
       />
       <GreatingContainer />
-      <ScrollView
-        contentContainerStyle={styles.content}
-        style={{...styles.view, backgroundColor: backgroundThemeColor}}>
-        {children}
-      </ScrollView>
+      {children}
     </SafeAreaView>
   );
 };
@@ -34,8 +31,5 @@ const styles = StyleSheet.create({
   },
   content: {
     flexGrow: 1,
-  },
-  view: {
-    flex: 1,
   },
 });
