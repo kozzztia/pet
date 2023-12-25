@@ -8,4 +8,5 @@ export const COLORS = {
   lightTitle: '#ebf2fa',
 
   decorColor: '#3a506b',
+  shadowColor: '#fff',
 };
