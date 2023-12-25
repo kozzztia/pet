@@ -28,7 +28,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     <Layout>
       <CustomButton
         handler={() => navigation.navigate('Game')}
-        title={'Go to Game'}
+        title={'Game'}
       />
       {locations && (
         <FlatList
