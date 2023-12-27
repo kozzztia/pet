@@ -4,7 +4,7 @@ import {ScreenNavigationProp} from '../types/navigationsType';
 
 import {GetLocations} from '../utils/workWithApi';
 import {ActivityIndicator, FlatList} from 'react-native';
-import {setLocationsAndNextPageToRedux} from '../store/locationsSlice';
+import {setLocationsAndNextPageToRedux} from '../store/homeSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {Title} from '../components/ui/Text';
@@ -32,8 +32,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
       {locations && (
         <FlatList
           data={locations}
-          // windowSize={5}
-          // initialNumToRender={5}
+          windowSize={5}
+          initialNumToRender={5}
           renderItem={({item}) => (
             <LocationCard
               key={`${item.id.toString()}${item.name}`}

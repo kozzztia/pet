@@ -1,18 +1,18 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {locationType} from '../types/locationsTypes';
 
-export interface LocationsState {
+export interface HomeState {
   locations: locationType[];
   nextPage: string | null;
 }
 
-const initialState: LocationsState = {
+const initialState: HomeState = {
   locations: [],
   nextPage: null,
 };
 
-const locationsSlice = createSlice({
-  name: 'locationsValue',
+const homeSlice = createSlice({
+  name: 'homeValue',
   initialState,
   reducers: {
     setLocationsAndNextPageToRedux: (
@@ -28,5 +28,5 @@ const locationsSlice = createSlice({
   },
 });
 
-export const {setLocationsAndNextPageToRedux} = locationsSlice.actions;
-export default locationsSlice.reducer;
+export const {setLocationsAndNextPageToRedux} = homeSlice.actions;
+export default homeSlice.reducer;
