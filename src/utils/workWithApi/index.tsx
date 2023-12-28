@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {LocationsState} from '../../store/homeSlice';
+import {HomeState} from '../../store/homeSlice';
 
-export const GetLocations = async (point: string): Promise<LocationsState> => {
+export const GetLocations = async (point: string): Promise<HomeState> => {
   try {
     const res = await axios.get(point);
     const locations = res.data.results;

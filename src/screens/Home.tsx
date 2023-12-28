@@ -1,65 +1,41 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {Layout} from '../layouts';
-import {ScreenNavigationProp} from '../types/navigationsType';
-
-import {GetLocations} from '../utils/workWithApi';
-import {ActivityIndicator, FlatList} from 'react-native';
-import {setLocationsAndNextPageToRedux} from '../store/homeSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../store';
+import {RootStackParamList} from '../types/navigationsType';
+import {FlatList, StyleSheet} from 'react-native';
 import {Title} from '../components/ui/Text';
-import {api} from '../consts/api';
-import {useTheme} from '../providers/ThemeProvider';
-import LocationCard from '../components/LocationCard';
+import {dictionary} from '../consts/dictionary';
+import {SIZES} from '../styles';
+import {CustomButton} from '../components/ui/Buttons';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type HomeScreenProps = {
-  navigation: ScreenNavigationProp;
+  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const {navigationThemeColor} = useTheme();
-  const dispatch = useDispatch();
-  const {locations, nextPage} = useSelector(
-    (state: RootState) => state.locations,
-  );
-  useLayoutEffect(() => {
-    GetLocations(api).then(res =>
-      dispatch(setLocationsAndNextPageToRedux(res)),
-    );
-  }, [dispatch]);
+  const {title} = dictionary.home;
   return (
     <Layout>
-      {locations && (
-        <FlatList
-          data={locations}
-          windowSize={5}
-          initialNumToRender={5}
-          renderItem={({item}) => (
-            <LocationCard
-              key={`${item.id.toString()}${item.name}`}
-              data={item}
-              navigation={navigation}
-            />
-          )}
-          // keyExtractor={item => `${item.id.toString()}${item.name}`}
-          onEndReached={() => {
-            nextPage &&
-              GetLocations(nextPage).then(res =>
-                dispatch(setLocationsAndNextPageToRedux(res)),
-              );
-          }}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={
-            nextPage ? (
-              <ActivityIndicator size={'small'} color={navigationThemeColor} />
-            ) : (
-              <Title title={locations.length.toString()} />
-            )
-          }
-        />
-      )}
+      <Title title={title} />
+      <FlatList
+        style={styles.list}
+        data={['one', 'two', 'three']}
+        renderItem={({item}) => (
+          <CustomButton
+            title={item}
+            handler={() => navigation.navigate('Game', {game: item})}
+          />
+        )}
+        keyExtractor={item => item.toString()}
+      />
     </Layout>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  list: {
+    padding: SIZES.mainPadding,
+  },
+});

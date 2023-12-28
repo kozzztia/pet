@@ -2,10 +2,19 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Layout} from '../layouts';
 
-const GameScreen: React.FC = () => {
+type GameScreenProps = {
+  route: {
+    params: {
+      game: string;
+    };
+  };
+};
+
+const GameScreen: React.FC<GameScreenProps> = ({route}) => {
+  const {game} = route.params;
   return (
     <Layout>
-      <Text>game number</Text>
+      <Text>game {game}</Text>
     </Layout>
   );
 };
