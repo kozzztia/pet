@@ -10,6 +10,10 @@ interface Location {
 interface LocationsResponse {
   locations: {
     results: Location[];
+    info: {
+      next: number | null;
+      prev: number | null;
+    };
   };
 }
 
@@ -46,6 +50,10 @@ export const rickAndMortyApi = createApi({
                 id
                 name
                 type
+              }
+              info {
+                next
+                prev
               }
             }
           }
