@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Layout} from '../layouts';
 import {RootStackParamList} from '../types/navigationsType';
 import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
@@ -15,13 +15,14 @@ type HomeScreenProps = {
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+  const [page, setPage] = useState<number>(1);
   const {title} = dictionary.home;
-  const {data, isLoading, error} = useGetLocationsQuery(1);
+  const {data, isLoading, isError} = useGetLocationsQuery(page);
 
-  if (error) {
+  if (isError) {
     return <Title title="Error" />;
   }
-
+  console.log(data?.locations?.results);
   return (
     <Layout>
       <Title title={title} />
@@ -38,8 +39,24 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             />
           )}
           keyExtractor={item => item.id.toString()}
-          onEndReachedThreshold={0.1} // Adjust as needed
-          ListFooterComponent={<ListNavigation />}
+          onEndReachedThreshold={0.1}
+          ListFooterComponent={
+            isLoading ? (
+              <ActivityIndicator size="large" color={COLORS.decorColor} />
+            ) : (
+              // <ListNavigation />
+              <>
+                <CustomButton
+                  title={'next'}
+                  handler={() => setPage(prev => prev + 1)}
+                />
+                <CustomButton
+                  title={'prev'}
+                  handler={() => setPage(prev => prev - 1)}
+                />
+              </>
+            )
+          }
         />
       )}
     </Layout>
