@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Layout} from '../layouts';
 import {RootStackParamList} from '../types/navigationsType';
-import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
+import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {Title} from '../components/ui/Text';
 import {dictionary} from '../consts/dictionary';
 import {COLORS, SIZES} from '../styles';
@@ -15,58 +15,63 @@ type HomeScreenProps = {
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number | null>(1);
   const {title} = dictionary.home;
-  const {data, isLoading, isError} = useGetLocationsQuery(page);
+  const {data, isLoading, isError, isFetching} = useGetLocationsQuery(
+    page as number,
+  );
 
   if (isError) {
     return <Title title="Error" />;
   }
-  console.log(data?.locations?.results);
+
+  const hasNextPage = !!data?.locations?.info.next;
+  const hasPrevPage = !!data?.locations?.info.prev;
+
   return (
     <Layout>
-      <Title title={title} />
-      {isLoading ? (
-        <ActivityIndicator size="large" color={COLORS.decorColor} />
-      ) : (
-        <FlatList
-          style={styles.list}
-          data={data?.locations.results}
-          renderItem={({item}) => (
-            <CustomButton
-              title={item.name}
-              handler={() => navigation.navigate('Game', {game: item.name})}
-            />
-          )}
-          keyExtractor={item => item.id.toString()}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={
-            isLoading ? (
-              <ActivityIndicator size="large" color={COLORS.decorColor} />
-            ) : (
-              // <ListNavigation />
-              <>
-                <CustomButton
-                  title={'next'}
-                  handler={() => setPage(prev => prev + 1)}
-                />
-                <CustomButton
-                  title={'prev'}
-                  handler={() => setPage(prev => prev - 1)}
-                />
-              </>
-            )
-          }
+      <View style={styles.container}>
+        <Title title={title} />
+        {isFetching ? (
+          <ActivityIndicator
+            size="large"
+            color={COLORS.decorColor}
+            style={styles.indicator}
+          />
+        ) : (
+          <FlatList
+            style={styles.list}
+            data={data?.locations.results}
+            renderItem={({item}) => (
+              <CustomButton
+                title={item.name}
+                handler={() => navigation.navigate('Game', {game: item.name})}
+              />
+            )}
+            keyExtractor={item => item.id.toString()}
+            onEndReachedThreshold={0.1}
+          />
+        )}
+        <ListNavigation
+          handler={setPage}
+          next={data?.locations.info.next}
+          prev={data?.locations.info.prev}
         />
-      )}
+      </View>
     </Layout>
   );
 };
 
-export default HomeScreen;
-
 const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+  },
+  indicator: {
+    flexGrow: 1,
+  },
   list: {
     padding: SIZES.mainPadding,
   },
 });
+
+export default HomeScreen;

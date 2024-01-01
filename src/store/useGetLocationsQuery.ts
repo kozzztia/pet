@@ -41,11 +41,11 @@ export const rickAndMortyApi = createApi({
   reducerPath: 'rickAndMortyApi',
   baseQuery: graphqlRequestBaseQuery,
   endpoints: builder => ({
-    getLocations: builder.query<LocationsResponse, number>({
-      query: (page = 1) => ({
+    getLocations: builder.query<LocationsResponse, number | null>({
+      query: page => ({
         document: `
           query {
-            locations(page: ${page}) {
+            locations(page: ${page ? page : 1}) {
               results {
                 id
                 name
