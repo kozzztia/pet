@@ -1,11 +1,6 @@
 import {createApi, BaseQueryFn} from '@reduxjs/toolkit/query/react';
 import {GraphQLClient, ClientError} from 'graphql-request';
-
-interface Location {
-  id: number;
-  name: string;
-  type: string;
-}
+import {Location} from '../types/locationType';
 
 interface LocationsResponse {
   locations: {

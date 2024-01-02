@@ -10,14 +10,23 @@ import {
 import {COLORS, SIZES} from '../../../styles';
 
 type buttonProps = {
-  title: string;
+  title: string | React.ReactNode;
   style?: StyleProp<ViewStyle>;
   handler: () => void;
+  isDisabled?: boolean;
 };
 
-const CustomButton: React.FC<buttonProps> = ({title, handler, style}) => {
+const CustomButton: React.FC<buttonProps> = ({
+  title,
+  handler,
+  isDisabled,
+  style,
+}) => {
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={handler}>
+    <TouchableOpacity
+      style={[styles.button, style]}
+      onPress={handler}
+      disabled={isDisabled}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );

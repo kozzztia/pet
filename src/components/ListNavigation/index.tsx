@@ -1,22 +1,25 @@
 import * as React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {CustomButton} from '../ui/Buttons';
 import {SIZES} from '../../styles';
+import {useTheme} from '../../providers/ThemeProvider';
 
 interface ListNavigationProps {
   handler: React.Dispatch<React.SetStateAction<number | null>>;
-  isFetching?: boolean;
-  prev?: number | null;
-  next?: number | null;
+  isFetching: boolean;
+  prev: number | null;
+  next: number | null;
 }
 
 const ListNavigation: React.FC<ListNavigationProps> = ({
   handler,
   prev,
   next,
+  isFetching,
 }) => {
   const hasNextPage = !!next;
   const hasPrevPage = !!prev;
+  const {navigationThemeColor} = useTheme();
   return (
     <View style={styles.controll}>
       {hasPrevPage && (
@@ -29,7 +32,14 @@ const ListNavigation: React.FC<ListNavigationProps> = ({
       {hasNextPage && (
         <CustomButton
           style={styles.btn}
-          title={'next'}
+          isDisabled={isFetching}
+          title={
+            !isFetching ? (
+              'next'
+            ) : (
+              <ActivityIndicator color={navigationThemeColor} />
+            )
+          }
           handler={() => handler(next as number)}
         />
       )}
