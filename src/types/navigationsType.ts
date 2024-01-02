@@ -2,7 +2,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  Game: {game: string};
+  Game: {game: number};
   Default: undefined;
 };
 

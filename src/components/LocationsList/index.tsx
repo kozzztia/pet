@@ -18,13 +18,13 @@ const LocationsList: React.FC<LocationsListProps> = ({
   const height = useWindowDimensions().height;
   return (
     <FlatList
-      style={{...styles.list, maxHeight: height - 185}}
+      style={{...styles.list, maxHeight: height - 175}}
       data={locations}
       renderItem={({item}) => (
         <LocationCard
           data={item}
           style={styles.card}
-          navigateHandler={() => navigation.navigate('Game', {game: item.name})}
+          navigateHandler={() => navigation.navigate('Game', {game: item.id})}
         />
       )}
       keyExtractor={item => item.id.toString()}

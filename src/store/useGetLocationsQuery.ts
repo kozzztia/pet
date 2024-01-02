@@ -45,6 +45,10 @@ export const rickAndMortyApi = createApi({
                 id
                 name
                 type
+                residents {
+                  id
+                  image  
+                }
               }
               info {
                 next

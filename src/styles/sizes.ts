@@ -7,5 +7,6 @@ export const SIZES = {
   mainMargin: 5,
   minBtnWidth: 100,
   minComtainerHeight: 50,
+  maxBtnHeight: 30,
   gap: 5,
 };

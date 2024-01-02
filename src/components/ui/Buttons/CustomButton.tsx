@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     padding: SIZES.mainPadding,
     borderRadius: SIZES.radius,
     minWidth: SIZES.minBtnWidth,
+    maxHeight: SIZES.maxBtnHeight,
   },
   buttonText: {
     color: '#fff',
