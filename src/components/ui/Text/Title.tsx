@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {StyleProp, StyleSheet, Text, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
 import {useTheme} from '../../../providers/ThemeProvider';
 import {SIZES} from '../../../styles';
 
 type titleProps = {
   title: string;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
 };
 
 const Title: React.FC<titleProps> = ({title, style}) => {

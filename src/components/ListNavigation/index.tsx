@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {CustomButton} from '../ui/Buttons';
-import {SIZES} from '../../styles';
+import {COLORS, SIZES} from '../../styles';
 import {useTheme} from '../../providers/ThemeProvider';
 
 interface ListNavigationProps {
@@ -19,9 +19,9 @@ const ListNavigation: React.FC<ListNavigationProps> = ({
 }) => {
   const hasNextPage = !!next;
   const hasPrevPage = !!prev;
-  const {navigationThemeColor} = useTheme();
+  const {navigationThemeColor, backgroundThemeColor} = useTheme();
   return (
-    <View style={styles.controll}>
+    <View style={[styles.controll, {borderTopColor: navigationThemeColor}]}>
       {hasPrevPage && (
         <CustomButton
           style={styles.btn}
@@ -37,7 +37,7 @@ const ListNavigation: React.FC<ListNavigationProps> = ({
             !isFetching ? (
               'next'
             ) : (
-              <ActivityIndicator color={navigationThemeColor} />
+              <ActivityIndicator color={backgroundThemeColor} />
             )
           }
           handler={() => handler(next as number)}
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
   controll: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 'auto',
     gap: SIZES.gap,
+    borderTopWidth: 1, // Add a border of 1 pixel
   },
   btn: {
     flexGrow: 1,

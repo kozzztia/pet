@@ -4,7 +4,8 @@ import {SIZES} from '../../styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/navigationsType';
 import {Location} from '../../types/locationType';
-import LocationCard from '../ui/LocationCard';
+import LocationCard from '../LocationCard';
+import {useTheme} from '../../providers/ThemeProvider';
 
 interface LocationsListProps {
   locations: Location[] | undefined;
@@ -16,9 +17,14 @@ const LocationsList: React.FC<LocationsListProps> = ({
   navigation,
 }) => {
   const height = useWindowDimensions().height;
+  const {navigationThemeColor} = useTheme();
   return (
     <FlatList
-      style={{...styles.list, maxHeight: height - 175}}
+      style={{
+        ...styles.list,
+        maxHeight: height - 195,
+        borderTopColor: navigationThemeColor,
+      }}
       data={locations}
       renderItem={({item}) => (
         <LocationCard
@@ -37,6 +43,7 @@ export default LocationsList;
 const styles = StyleSheet.create({
   list: {
     paddingTop: SIZES.mainPadding,
+    borderTopWidth: 1,
   },
   card: {
     marginBottom: SIZES.mainMargin,

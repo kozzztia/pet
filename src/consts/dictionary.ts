@@ -15,7 +15,9 @@ export const dictionary = {
     clear: 'Clear',
   },
   home: {
-    title: 'Locations list',
+    title: 'Locations list :',
+    link: 'Go to',
+    wait: 'wait...',
   },
   default: {
     message: 'Please, insert your name to play',
