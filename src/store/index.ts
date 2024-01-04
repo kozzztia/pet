@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import userReducer from './userSlice';
-import {rickAndMortyApi} from './useGetLocationsQuery'; // Import your RTK-Query API
+import {rickAndMortyApi} from './useGetDataQuery';
 
 const store = configureStore({
   reducer: {
@@ -8,7 +8,9 @@ const store = configureStore({
     [rickAndMortyApi.reducerPath]: rickAndMortyApi.reducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(rickAndMortyApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(rickAndMortyApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

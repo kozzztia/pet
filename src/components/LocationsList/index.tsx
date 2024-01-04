@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   card: {
-    marginBottom: SIZES.mainMargin,
+    marginBottom: 20,
   },
 });

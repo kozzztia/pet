@@ -1,6 +1,7 @@
 import {createApi, BaseQueryFn} from '@reduxjs/toolkit/query/react';
 import {GraphQLClient, ClientError} from 'graphql-request';
 import {Location} from '../types/locationType';
+import {Resident} from '../types/residentType';
 
 interface LocationsResponse {
   locations: {
@@ -9,6 +10,13 @@ interface LocationsResponse {
       next: number | null;
       prev: number | null;
     };
+  };
+}
+
+interface ResidentsResponse {
+  location: {
+    name: string;
+    residents: Resident[];
   };
 }
 
@@ -44,10 +52,8 @@ export const rickAndMortyApi = createApi({
               results {
                 id
                 name
-                type
                 residents {
                   id
-                  image  
                 }
               }
               info {
@@ -59,7 +65,27 @@ export const rickAndMortyApi = createApi({
         `,
       }),
     }),
+    getResidents: builder.query<ResidentsResponse, number>({
+      query: id => ({
+        document: `
+          query {
+            location(id : ${id}){
+              name
+              residents{
+                id
+                name
+                image
+                status
+                species
+                type
+                gender
+              }
+            }
+          }
+        `,
+      }),
+    }),
   }),
 });
 
-export const {useGetLocationsQuery} = rickAndMortyApi;
+export const {useGetLocationsQuery, useGetResidentsQuery} = rickAndMortyApi;

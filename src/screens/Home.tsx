@@ -11,7 +11,7 @@ import {Title} from '../components/ui/Text';
 import {dictionary} from '../consts/dictionary';
 import {COLORS, SIZES} from '../styles';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useGetLocationsQuery} from '../store/useGetLocationsQuery';
+import {useGetLocationsQuery} from '../store/useGetDataQuery';
 import ListNavigation from '../components/ListNavigation';
 import LocationsList from '../components/LocationsList';
 

@@ -20,7 +20,6 @@ const LocationCard: React.FC<LocationCardProps> = ({
   return (
     <View style={[styles.card, style]}>
       <Title title={data?.name} style={styles.title} />
-      <Title title={data?.residents.length.toString()} style={styles.number} />
       <CustomButton title={link} handler={navigateHandler} />
     </View>
   );
@@ -35,9 +34,5 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: SIZES.textSize,
-  },
-  number: {
-    fontSize: SIZES.textSize,
-    marginLeft: 'auto',
   },
 });
