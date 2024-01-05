@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import {CustomButton} from '../ui/Buttons';
-import {COLORS, SIZES} from '../../styles';
+import {SIZES} from '../../styles';
 import {useTheme} from '../../providers/ThemeProvider';
 
 interface ListNavigationProps {
@@ -49,10 +49,9 @@ const ListNavigation: React.FC<ListNavigationProps> = ({
 
 const styles = StyleSheet.create({
   controll: {
-    alignItems: 'center',
     flexDirection: 'row',
     gap: SIZES.gap,
-    borderTopWidth: 1, // Add a border of 1 pixel
+    borderTopWidth: 1,
   },
   btn: {
     flexGrow: 1,

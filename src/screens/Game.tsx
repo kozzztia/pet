@@ -1,7 +1,10 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import {Layout} from '../layouts';
 import {useGetResidentsQuery} from '../store/useGetDataQuery';
+import {useTheme} from '../providers/ThemeProvider';
+import {Title} from '../components/ui/Text';
+import GameContainer from '../components/GameContainer';
 
 type GameScreenProps = {
   route: {
@@ -13,11 +16,19 @@ type GameScreenProps = {
 
 const GameScreen: React.FC<GameScreenProps> = ({route}) => {
   const {game} = route.params;
-  const {data, isError, isFetching} = useGetResidentsQuery(game as number);
-  console.log(data);
+  const {navigationThemeColor} = useTheme();
+  const {data, isFetching} = useGetResidentsQuery(game as number);
+  if (isFetching) {
+    <ActivityIndicator size={'large'} color={navigationThemeColor} />;
+  }
   return (
     <Layout>
-      <Text>game {game}</Text>
+      <Title
+        title={`${data?.location?.name}: ${
+          data ? data?.location.residents.length : 'wait...'
+        }`}
+      />
+      <GameContainer residents={data?.location.residents} />
     </Layout>
   );
 };

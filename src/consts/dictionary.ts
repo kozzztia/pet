@@ -16,7 +16,7 @@ export const dictionary = {
   },
   home: {
     title: 'Locations list :',
-    link: 'Go to location',
+    link: 'Play',
     wait: 'wait...',
   },
   default: {

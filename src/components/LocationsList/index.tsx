@@ -4,7 +4,7 @@ import {SIZES} from '../../styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/navigationsType';
 import {Location} from '../../types/locationType';
-import LocationCard from '../LocationCard';
+import LocationCard from './LocationCard';
 import {useTheme} from '../../providers/ThemeProvider';
 
 interface LocationsListProps {
