@@ -12,20 +12,24 @@ interface GameContainerProps {
 
 const getCardSize = (length: number): number => {
   const cardSize = Dimensions.get('window').width;
+
   if (length <= 10) {
     return cardSize / 2 - SIZES.mainMargin;
   }
-  if (length > 10 && length <= 30) {
+  if (length <= 30) {
     return cardSize / 3 - SIZES.mainMargin;
   }
-  if (length > 30 && length <= 60) {
+  if (length <= 60) {
     return cardSize / 4 - SIZES.mainMargin;
   }
   if (length > 60) {
     return cardSize / 5 - SIZES.mainMargin;
-  } else {
-    return 0;
   }
+  if (length > 90) {
+    return cardSize / 6 - SIZES.mainMargin;
+  }
+
+  return 0;
 };
 
 const GameContainer: React.FC<GameContainerProps> = ({residents, style}) => {

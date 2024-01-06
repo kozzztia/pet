@@ -19,8 +19,8 @@ export default GameCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: 90,
-    height: 90,
+    // width: 90,
+    // height: 90,
   },
   image: {
     position: 'absolute',
