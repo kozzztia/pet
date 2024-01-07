@@ -1,36 +1,14 @@
 import * as React from 'react';
-import {StyleSheet, StyleProp, ViewStyle, View, Dimensions} from 'react-native';
+import {StyleSheet, StyleProp, ViewStyle, View} from 'react-native';
 import {Resident} from '../../types/residentType';
 import GameCard from './GameCard';
 import {ScrollView} from 'react-native-gesture-handler';
-import {SIZES} from '../../styles';
+import {getCardSize} from '../../utils/gameUtils';
 
 interface GameContainerProps {
   residents: Resident[] | undefined;
   style?: StyleProp<ViewStyle>;
 }
-
-const getCardSize = (length: number): number => {
-  const cardSize = Dimensions.get('window').width;
-
-  if (length <= 10) {
-    return cardSize / 2 - SIZES.mainMargin;
-  }
-  if (length <= 30) {
-    return cardSize / 3 - SIZES.mainMargin;
-  }
-  if (length <= 60) {
-    return cardSize / 4 - SIZES.mainMargin;
-  }
-  if (length > 60) {
-    return cardSize / 5 - SIZES.mainMargin;
-  }
-  if (length > 90) {
-    return cardSize / 6 - SIZES.mainMargin;
-  }
-
-  return 0;
-};
 
 const GameContainer: React.FC<GameContainerProps> = ({residents, style}) => {
   return (

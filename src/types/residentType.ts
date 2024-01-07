@@ -7,3 +7,10 @@ export interface Resident {
   type: string;
   gender: string;
 }
+
+export interface GameResidents {
+  id: number;
+  name: string;
+  image: string;
+  isOpen: boolean;
+}
