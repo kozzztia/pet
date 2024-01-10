@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {getBlendedId, createGameResidents} from '../utils/gameUtils';
+import {createGameResidents} from '../utils/gameUtils';
 import {ActivityIndicator} from 'react-native';
 import {Layout} from '../layouts';
 import {useGetResidentsQuery} from '../store/useGetDataQuery';
@@ -25,7 +25,7 @@ const GameScreen: React.FC<GameScreenProps> = ({route}) => {
   useLayoutEffect(() => {
     if (data?.location.residents && data?.location.residents.length > 0) {
       const gameResidents = createGameResidents(data.location.residents);
-      console.log(gameResidents);
+      console.log(gameResidents.length);
     }
   }, [data?.location.residents]);
   return (

@@ -18,8 +18,7 @@ const GameCard: React.FC<GameCardProp> = ({data, style}) => {
 export default GameCard;
 
 const styles = StyleSheet.create({
-  card: {
-  },
+  card: {},
   image: {
     position: 'absolute',
     top: 0,

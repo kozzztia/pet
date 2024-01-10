@@ -1,6 +1,35 @@
 import {Dimensions} from 'react-native';
 import {SIZES} from '../../styles';
-import {GameResidents, Resident} from '../../types/residentType';
+import {GameResident, Resident} from '../../types/residentType';
+
+const getSize = (length: number): number => {
+  if (length < 4) {
+    return 1;
+  }
+  if (length >= 4 && length < 9) {
+    return 2;
+  }
+  if (length >= 9 && length < 16) {
+    return 3;
+  }
+  if (length >= 16 && length < 25) {
+    return 4;
+  }
+  if (length >= 25 && length < 36) {
+    return 5;
+  }
+  if (length >= 36) {
+    return 6;
+  }
+  return 0;
+};
+
+const getCardSize = (length: number): number => {
+  const cardSize = Dimensions.get('window').width;
+
+  const size = getSize(length);
+  return cardSize / size - SIZES.mainMargin;
+};
 
 const getBlendedId = (count: number): number[] => {
   let array: number[] = [];
@@ -13,30 +42,9 @@ const getBlendedId = (count: number): number[] => {
   return array;
 };
 
-const getCardSize = (length: number): number => {
-  const cardSize = Dimensions.get('window').width;
-
-  if (length <= 10) {
-    return cardSize / 2 - SIZES.mainMargin;
-  }
-  if (length <= 30) {
-    return cardSize / 3 - SIZES.mainMargin;
-  }
-  if (length <= 60) {
-    return cardSize / 4 - SIZES.mainMargin;
-  }
-  if (length > 60) {
-    return cardSize / 5 - SIZES.mainMargin;
-  }
-  if (length > 90) {
-    return cardSize / 6 - SIZES.mainMargin;
-  }
-  return 0;
-};
-
-const createGameResidents = (residents: Resident[]): GameResidents[] => {
-  const residentsCopy: GameResidents[] = [];
-  const residentsNew: GameResidents[] = [];
+const createGameResidents = (residents: Resident[]): GameResident[] => {
+  const residentsCopy: GameResident[] = [];
+  const residentsNew: GameResident[] = [];
   const position = getBlendedId(residents.length);
   for (let i = 0; i < residents.length; i++) {
     if (residents[i]) {
@@ -55,8 +63,9 @@ const createGameResidents = (residents: Resident[]): GameResidents[] => {
     }
   }
   const gameResidentsWithoutSort = [...residentsNew, ...residentsCopy];
+  const size = getSize(gameResidentsWithoutSort.length);
   const gameResidents = [];
-  for (let i = 0; i < gameResidentsWithoutSort.length; i++) {
+  for (let i = 0; i < size * size; i++) {
     gameResidents.push(gameResidentsWithoutSort[position[i]]);
   }
 

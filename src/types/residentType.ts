@@ -8,7 +8,7 @@ export interface Resident {
   gender: string;
 }
 
-export interface GameResidents {
+export interface GameResident {
   id: number;
   name: string;
   image: string;
