@@ -9,8 +9,13 @@ export interface Resident {
 }
 
 export interface GameResident {
-  id: number;
+  id: number | string;
   name: string;
   image: string;
   isOpen: boolean;
+}
+
+export interface GameData {
+  residents: GameResident[];
+  locationName: string;
 }

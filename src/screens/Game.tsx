@@ -1,11 +1,13 @@
-import React, {useLayoutEffect} from 'react';
-import {createGameResidents} from '../utils/gameUtils';
+import React from 'react';
+import {SetGameData} from '../utils/gameUtils';
 import {ActivityIndicator} from 'react-native';
 import {Layout} from '../layouts';
-import {useGetResidentsQuery} from '../store/useGetDataQuery';
 import {useTheme} from '../providers/ThemeProvider';
-import {Title} from '../components/ui/Text';
 import GameContainer from '../components/GameContainer';
+
+import {RootState} from '../store';
+import {useSelector} from 'react-redux';
+import {Title} from '../components/ui/Text';
 
 type GameScreenProps = {
   route: {
@@ -16,28 +18,21 @@ type GameScreenProps = {
 };
 
 const GameScreen: React.FC<GameScreenProps> = ({route}) => {
-  const {game} = route.params;
   const {navigationThemeColor} = useTheme();
-  const {data, isFetching} = useGetResidentsQuery(game as number);
-  if (isFetching) {
-    <ActivityIndicator size={'large'} color={navigationThemeColor} />;
-  }
-  useLayoutEffect(() => {
-    if (data?.location.residents && data?.location.residents.length > 0) {
-      const gameResidents = createGameResidents(data.location.residents);
-      console.log(gameResidents.length);
-    }
-  }, [data?.location.residents]);
+  const {game} = route.params;
+  SetGameData(game);
+  const {gameResidents, locationName} = useSelector(
+    (state: RootState) => state.game,
+  );
+
   return (
     <Layout>
-      <Title
-        title={
-          data
-            ? `${data?.location?.name}: ${data?.location.residents.length}`
-            : 'wait...'
-        }
-      />
-      <GameContainer residents={data?.location.residents} />
+      <Title title={locationName ? `${locationName}` : 'wait...'} />
+      {gameResidents ? (
+        <GameContainer residents={gameResidents} />
+      ) : (
+        <ActivityIndicator size={'large'} color={navigationThemeColor} />
+      )}
     </Layout>
   );
 };

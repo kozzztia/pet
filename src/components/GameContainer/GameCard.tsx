@@ -1,16 +1,18 @@
 import * as React from 'react';
 import {StyleProp, View, ViewStyle, Image, StyleSheet} from 'react-native';
-import {Resident} from '../../types/residentType';
+import {GameResident} from '../../types/residentType';
 
 interface GameCardProp {
-  data: Resident | undefined;
+  data: GameResident | undefined;
   style?: StyleProp<ViewStyle>;
 }
 
 const GameCard: React.FC<GameCardProp> = ({data, style}) => {
   return (
     <View style={[styles.card, style]}>
-      <Image style={styles.image} source={{uri: data?.image as string}} />
+      {data?.image && (
+        <Image style={styles.image} source={{uri: data?.image as string}} />
+      )}
     </View>
   );
 };

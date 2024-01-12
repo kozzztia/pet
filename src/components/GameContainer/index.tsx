@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {StyleSheet, StyleProp, ViewStyle, View} from 'react-native';
-import {Resident} from '../../types/residentType';
+import {GameResident} from '../../types/residentType';
 import GameCard from './GameCard';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getCardSize} from '../../utils/gameUtils';
 
 interface GameContainerProps {
-  residents: Resident[] | undefined;
+  residents: GameResident[] | undefined;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -17,7 +17,7 @@ const GameContainer: React.FC<GameContainerProps> = ({residents, style}) => {
         {residents?.map(item => (
           <GameCard
             data={item}
-            key={item.id}
+            key={item?.id}
             style={[
               styles.card,
               {
