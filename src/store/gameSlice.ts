@@ -1,32 +1,21 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {GameResident} from '../types/residentType';
+import {LocationData} from '../types/residentType';
 
-interface GameState {
-  gameResidents: GameResident[] | undefined;
-  locationName: string | undefined;
-}
-
-const initialState: GameState = {
-  gameResidents: undefined,
-  locationName: undefined,
+const initialState: LocationData = {
+  residents: [],
+  name: '',
 };
 
 const gameSlice = createSlice({
   name: 'gameResidents',
   initialState,
   reducers: {
-    setGameData: (
-      state,
-      action: PayloadAction<{
-        residents: GameResident[] | undefined;
-        locationName: string | undefined;
-      }>,
-    ) => {
-      state.gameResidents = action.payload.residents;
-      state.locationName = action.payload.locationName;
+    setLocationDataToStore: (state, action: PayloadAction<LocationData>) => {
+      state.residents = action.payload.residents;
+      state.name = action.payload.name;
     },
   },
 });
 
-export const {setGameData} = gameSlice.actions;
+export const {setLocationDataToStore} = gameSlice.actions;
 export default gameSlice.reducer;

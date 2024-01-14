@@ -1,34 +1,15 @@
-import {Dimensions} from 'react-native';
-import {SIZES} from '../../styles';
 import {GameData, GameResident, Resident} from '../../types/residentType';
 import {useGetResidentsQuery} from '../../store/useGetDataQuery';
+import {useDispatch} from 'react-redux';
+import {setGameDataToStore} from '../../store/gameSlice';
 
-const getSize = (length: number | undefined): number => {
-  if (!length || length < 8) {
-    return 0;
-  }
-  if (length >= 8 && length < 18) {
-    return 8;
-  }
-  if (length >= 18 && length < 32) {
-    return 16;
-  }
-  if (length >= 32) {
-    return 32;
-  }
-  return 0;
-};
+const getSize = (length: number | undefined): number =>
+  !length || length < 8 ? 1 : length < 18 ? 8 : length < 32 ? 16 : 32;
 
-const getCardSize = (length: number): number => {
-  const cardSize = Dimensions.get('window').width;
-  const size = getSize(length);
-  return cardSize / size - SIZES.mainMargin;
-};
-
-const getBlendedId = (count: number): number[] => {
-  let array: number[] = [];
-  while (array.length < count) {
-    const randomNumber: number = Math.floor(Math.random() * count);
+const getRandomArray = (length: number): number[] => {
+  const array: number[] = [];
+  while (array.length < length) {
+    const randomNumber: number = Math.floor(Math.random() * length);
     if (!array.includes(randomNumber)) {
       array.push(randomNumber);
     }
@@ -36,41 +17,52 @@ const getBlendedId = (count: number): number[] => {
   return array;
 };
 
+const blended = (
+  data: Resident[] | GameResident[],
+): (Resident | GameResident)[] => {
+  const limit = getSize(data.length as number);
+  const blendedData: (Resident | GameResident)[] = getRandomArray(limit).map(
+    item => data[item],
+  );
+  return blendedData;
+};
+
 const createGameResidents = (data: Resident[]): GameResident[] => {
-  const gameResidents: GameResident[] = [];
-  const copyResidents: GameResident[] = [];
-
   if (!data || data.length === undefined) {
-    return [...gameResidents, ...copyResidents];
+    return [];
   }
+  const blendedResidents = blended(data) as Resident[];
 
-  const arraySize = getSize(data.length as number);
-  const rundomNumbers = getBlendedId(arraySize * 2);
-  // ---create
-  data?.forEach(item => {
-    gameResidents.push({
+  return blendedResidents.flatMap(item => [
+    {
       id: `${item.id}-original`,
       name: `${item.name}`,
       image: `${item.image}`,
       isOpen: false,
-    });
-    copyResidents.push({
+    },
+    {
       id: `${item.id}-copy`,
       name: `${item.name}`,
       image: `${item.image}`,
       isOpen: false,
-    });
-  });
-
-  const newGameResidents = [...gameResidents, ...copyResidents];
-  return newGameResidents;
+    },
+  ]);
 };
+
+
 const SetGameData = async (game: number) => {
   const {data} = useGetResidentsQuery(game as number);
+  const dispatch = useDispatch();
+  if (data?.location.residents) {
+    const newResidents = createGameResidents(data.location.residents);
+    const newGameResidents = blended(newResidents) as GameResident[];
 
-  const newResidents = createGameResidents(data?.location.residents!);
-
-  console.log(newResidents);
+    const value = {
+      residents: newGameResidents,
+      locationName: data?.location.name,
+    };
+    dispatch(setGameDataToStore(value));
+  }
 };
 
-export {getBlendedId, getCardSize, SetGameData};
+export {SetGameData};

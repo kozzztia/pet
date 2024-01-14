@@ -6,7 +6,7 @@ import {rickAndMortyApi} from './useGetDataQuery';
 const store = configureStore({
   reducer: {
     user: userReducer,
-    game: gameReducer,
+    location: gameReducer,
     [rickAndMortyApi.reducerPath]: rickAndMortyApi.reducer,
   },
   middleware: getDefaultMiddleware =>

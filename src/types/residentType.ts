@@ -8,14 +8,14 @@ export interface Resident {
   gender: string;
 }
 
-export interface GameResident {
-  id: number | string;
-  name: string;
-  image: string;
-  isOpen: boolean;
-}
+// export interface GameResident {
+//   id: number | string;
+//   name: string;
+//   image: string;
+//   isOpen: boolean;
+// }
 
-export interface GameData {
-  residents: GameResident[];
-  locationName: string;
+export interface LocationData {
+  residents: Resident[];
+  name: string;
 }

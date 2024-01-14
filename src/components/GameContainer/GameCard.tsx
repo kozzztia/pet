@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {StyleProp, View, ViewStyle, Image, StyleSheet} from 'react-native';
-import {GameResident} from '../../types/residentType';
+import {Resident} from '../../types/residentType';
 
 interface GameCardProp {
-  data: GameResident | undefined;
+  data: Resident;
   style?: StyleProp<ViewStyle>;
 }
 
