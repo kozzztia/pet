@@ -27,7 +27,7 @@ const blended = (
   return blendedData;
 };
 
-const createGameResidents = (data: Resident[]): GameResident[] => {
+export const createGameResidents = (data: Resident[]): GameResident[] => {
   if (!data || data.length === undefined) {
     return [];
   }

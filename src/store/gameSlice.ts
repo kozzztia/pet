@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {LocationData} from '../types/residentType';
 
-const initialState: LocationData = {
+export const initialState: LocationData = {
   residents: [],
   name: '',
 };
