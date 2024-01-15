@@ -22,4 +22,8 @@ export const dictionary = {
   default: {
     message: 'Please, insert your name to play',
   },
+  dame: {
+    btnMore: 'Residents',
+    btnGame: 'Game',
+  },
 };

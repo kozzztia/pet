@@ -8,12 +8,17 @@ export interface Resident {
   gender: string;
 }
 
-// export interface GameResident {
-//   id: number | string;
-//   name: string;
-//   image: string;
-//   isOpen: boolean;
-// }
+export interface GameResident {
+  id: number | string;
+  name: string;
+  image: string;
+  isOpen: boolean;
+}
+
+export interface LocationGameData {
+  residents: GameResident[];
+  name: string;
+}
 
 export interface LocationData {
   residents: Resident[];

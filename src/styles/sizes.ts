@@ -1,8 +1,8 @@
 export const SIZES = {
   mainSize: 20,
   textSize: 15,
-  titleSize: 25,
-  btnWidth: 20,
+  titleSize: 18,
+  btnWidth: 18,
   mainPadding: 5,
   radius: 5,
   mainMargin: 5,

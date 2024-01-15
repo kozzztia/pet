@@ -1,32 +1,36 @@
 import * as React from 'react';
 import {StyleProp, View, ViewStyle, Image, StyleSheet} from 'react-native';
 import {Resident} from '../../types/residentType';
+import {SIZES} from '../../styles';
+import {Title} from '../ui/Text';
 
-interface GameCardProp {
+interface GalleryCardProps {
   data: Resident;
   style?: StyleProp<ViewStyle>;
 }
 
-const GameCard: React.FC<GameCardProp> = ({data, style}) => {
+const GalleryCard: React.FC<GalleryCardProps> = ({data, style}) => {
   return (
     <View style={[styles.card, style]}>
       {data?.image && (
         <Image style={styles.image} source={{uri: data?.image as string}} />
       )}
+      <Title title={data?.name} />
+      <Title title={data?.gender} />
     </View>
   );
 };
 
-export default GameCard;
+export default GalleryCard;
 
 const styles = StyleSheet.create({
-  card: {},
+  card: {
+    margin: SIZES.mainMargin,
+    flexDirection: 'row',
+  },
   image: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    height: 100 - SIZES.mainMargin,
+    width: 100 - SIZES.mainMargin,
     resizeMode: 'cover',
   },
 });

@@ -17,7 +17,7 @@ const getRandomArray = (length: number): number[] => {
   return array;
 };
 
-const blended = (
+export const blended = (
   data: Resident[] | GameResident[],
 ): (Resident | GameResident)[] => {
   const limit = getSize(data.length as number);
