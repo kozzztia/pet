@@ -39,7 +39,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <ActivityIndicator
             size="large"
             color={COLORS.decorColor}
-            style={[styles.indicator, {maxHeight: height - 195}]}
+            style={[styles.indicator, {maxHeight: height - SIZES.screenSize}]}
           />
         ) : (
           <LocationsList

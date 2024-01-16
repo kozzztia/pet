@@ -22,7 +22,7 @@ const LocationsList: React.FC<LocationsListProps> = ({
     <FlatList
       style={{
         ...styles.list,
-        maxHeight: height - 195,
+        maxHeight: height - SIZES.screenSize,
         borderTopColor: navigationThemeColor,
       }}
       data={locations}

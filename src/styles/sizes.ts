@@ -10,4 +10,5 @@ export const SIZES = {
   minComtainerHeight: 50,
   maxBtnHeight: 30,
   gap: 5,
+  screenSize: 165,
 };

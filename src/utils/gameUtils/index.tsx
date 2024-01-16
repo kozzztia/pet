@@ -1,7 +1,6 @@
-import {GameData, GameResident, Resident} from '../../types/residentType';
+import {Resident} from '../../types/residentType';
 import {useGetResidentsQuery} from '../../store/useGetDataQuery';
 import {useDispatch} from 'react-redux';
-import {setGameDataToStore} from '../../store/gameSlice';
 
 const getSize = (length: number | undefined): number =>
   !length || length < 8 ? 1 : length < 18 ? 8 : length < 32 ? 16 : 32;
@@ -19,9 +18,9 @@ const getRandomArray = (length: number): number[] => {
 
 export const blended = (
   data: Resident[] | GameResident[],
-): (Resident | GameResident)[] => {
+): (Resident[] | GameResident)[] => {
   const limit = getSize(data.length as number);
-  const blendedData: (Resident | GameResident)[] = getRandomArray(limit).map(
+  const blendedData: (Resident[] | GameResident)[] = getRandomArray(limit).map(
     item => data[item],
   );
   return blendedData;
