@@ -22,7 +22,7 @@ export const dictionary = {
   default: {
     message: 'Please, insert your name to play',
   },
-  dame: {
+  game: {
     btnMore: 'Residents',
     btnGame: 'Game',
   },

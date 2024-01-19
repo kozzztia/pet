@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -11,16 +11,16 @@ import {Title} from '../components/ui/Text';
 import {useGetResidentsQuery} from '../store/useGetDataQuery';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  setBublesDataToStore,
-  initialState as initialGameState,
+  initialState as initialLocationState,
   setLocationDataToStore,
-} from '../store/gameSlice';
+} from '../store/locationSlice';
 import {RootState} from '../store';
 import {CustomButton} from '../components/ui/Buttons';
 import {dictionary} from '../consts/dictionary';
 import GalleryContainer from '../components/GalleryContainer';
 import GameContainer from '../components/GameContainer';
-import {SIZES} from '../styles/sizes';
+import {SIZES} from '../styles';
+import {blendedResidents} from '../utils/gameUtils';
 
 type GameScreenProps = {
   route: {
@@ -36,33 +36,33 @@ const GameScreen: React.FC<GameScreenProps> = ({route}) => {
   const height = useWindowDimensions().height;
   const {game} = route.params;
   const {data} = useGetResidentsQuery(game as number);
-  const {name, residents, bubles} = useSelector(
+  const {name, residents, gameResidents} = useSelector(
     (state: RootState) => state.location,
   );
-  const {btnMore, btnGame} = dictionary.dame;
+  const {btnMore, btnGame} = dictionary.game;
 
   const [isShow, setIsShow] = useState<boolean>(true);
 
   useLayoutEffect(() => {
     if (data) {
       dispatch(
-        setLocationDataToStore(data?.location),
-        setBublesDataToStore({bubles: []}),
+        setLocationDataToStore({
+          residents: data.location.residents,
+          name: data.location.name,
+          gameResidents: blendedResidents(data.location.residents),
+        }),
       );
     }
-  }, [game, dispatch, data?.location.residents, data?.location.name, data]);
+  }, [game, dispatch, data]);
 
   useLayoutEffect(() => {
     return () => {
-      dispatch(
-        setLocationDataToStore(initialGameState),
-        setBublesDataToStore({bubles: []}),
-      );
+      dispatch(setLocationDataToStore(initialLocationState));
     };
   }, [dispatch]);
   return (
     <Layout>
-      {name !== initialGameState.name ? (
+      {name !== initialLocationState.name ? (
         <View style={styles.controll}>
           <Title title={name} />
           <CustomButton
@@ -74,11 +74,11 @@ const GameScreen: React.FC<GameScreenProps> = ({route}) => {
         <Title title={'wait...'} />
       )}
 
-      {residents.length > 0 ? (
+      {residents ? (
         isShow ? (
           <GalleryContainer residents={residents} />
         ) : (
-          <GameContainer />
+          <GameContainer gameResidents={gameResidents} />
         )
       ) : (
         <ActivityIndicator

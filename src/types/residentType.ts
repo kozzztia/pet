@@ -8,24 +8,15 @@ export interface Resident {
   gender: string;
 }
 
-export interface BubleResident {
+export interface GameResident {
   id: number | string;
   name: string;
   image: string;
   isOpen: boolean;
 }
 
-export interface LocationData {
+export interface LocationStateData {
+  gameResidents: GameResident[];
   residents: Resident[];
-  name: string;
-}
-
-export interface BublesData {
-  bubles: BubleResident[];
-}
-
-export interface GameStateData {
-  residents: Resident[];
-  bubles: BubleResident[];
   name: string;
 }
