@@ -5,7 +5,7 @@ import {
   setGameResidentsToStore,
 } from './locationSlice';
 import {useGetResidentsQuery} from './useGetDataQuery';
-import {blendedResidents} from '../utils/gameUtils';
+import {blendedResidents} from '../utils/gameUtils/utils';
 
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',

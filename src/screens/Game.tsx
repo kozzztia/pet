@@ -20,7 +20,7 @@ import {dictionary} from '../consts/dictionary';
 import GalleryContainer from '../components/GalleryContainer';
 import GameContainer from '../components/GameContainer';
 import {SIZES} from '../styles';
-import {blendedResidents} from '../utils/gameUtils';
+import {blendedResidents} from '../utils/gameUtils/utils';
 
 type GameScreenProps = {
   route: {
