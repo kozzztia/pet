@@ -11,39 +11,65 @@ const getRandomArray = (length: number): number[] => {
   return array;
 };
 
-const shuffleAndTake = <T>(array: T[], count: number): T[] => {
-  const shuffledArray: T[] = [];
+const blended = <T>(array: T[]): T[] => {
+  const result: T[] = [];
   const position = getRandomArray(array.length);
-  for (let i = 0; i < count; i++) {
-    shuffledArray.push(array[position[i]]);
+  if (array.length < 8) {
+    for (let i = 0; i < array.length; i++) {
+      result.push(array[position[i]]);
+    }
   }
-  return shuffledArray;
+  if (array.length >= 8) {
+    for (let i = 0; i < 8; i++) {
+      result.push(array[position[i]]);
+    }
+  }
+  return result;
+};
+
+const resultBlend = <G>(array: G[]) => {
+  const result: G[] = [];
+  const position = getRandomArray(array.length);
+  for (let i = 0; i < array.length; i++) {
+    result.push(array[position[i]]);
+  }
+  return result;
 };
 
 const blendedResidents = (residents: Resident[]): GameResident[] => {
-  const blendedArray = shuffleAndTake(residents, Math.min(residents.length, 8));
-  const result: GameResident[] = [];
+  let result: GameResident[] = [];
+  let copyResult: GameResident[] = [];
 
-  blendedArray.forEach(item => {
-    result.push({
-      name: item.name,
-      image: item.image,
-      id: `${item.id}`,
-      isOpen: false,
+  const blendedArray = blended(residents);
+
+  if (blendedArray.length > 0 && residents.length < 8) {
+    blendedArray.forEach(item => {
+      result.push({
+        name: item.name,
+        image: item.image,
+        id: `${item.id}`,
+        isOpen: false,
+      });
     });
-  });
-
+  }
   if (blendedArray.length >= 8) {
-    const copyResult = shuffleAndTake(blendedArray, 8).map(item => ({
-      name: item.name,
-      image: item.image,
-      id: `${item.id}-copy`,
-      isOpen: false,
-    }));
-    result.push(...copyResult);
+    blendedArray.forEach(item => {
+      result.push({
+        name: item.name,
+        image: item.image,
+        id: `${item.id}-original`,
+        isOpen: false,
+      });
+      copyResult.push({
+        name: item.name,
+        image: item.image,
+        id: `${item.id}-copy`,
+        isOpen: false,
+      });
+    });
   }
 
-  return result;
+  return resultBlend([...result, ...copyResult]);
 };
 
 export {blendedResidents};
