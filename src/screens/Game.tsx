@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -20,7 +20,7 @@ import {dictionary} from '../consts/dictionary';
 import GalleryContainer from '../components/GalleryContainer';
 import GameContainer from '../components/GameContainer';
 import {SIZES} from '../styles';
-import {blendedResidents} from '../utils/gameUtils/utils';
+import {blendedResidents} from '../utils/gameUtils';
 
 type GameScreenProps = {
   route: {
