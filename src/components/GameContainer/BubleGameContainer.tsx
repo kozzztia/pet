@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import {SIZES} from '../../styles';
+import {getRundomSize} from '../../utils/gameUtils/bubleGameUtils';
 
 interface BubleGameContainerProps {
   bubleGameResidents: GameResident[];
@@ -10,14 +11,13 @@ interface BubleGameContainerProps {
 const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
   bubleGameResidents,
 }) => {
-  const size = Dimensions.get('window').width / 10 - SIZES.mainMargin * 2;
+  const size = getRundomSize();
   return (
     <View style={styles.cardsContainer}>
-      {bubleGameResidents?.map(item => (
-        <View style={[styles.card, {width: size, height: size}]} key={item.id}>
-          <Image style={styles.image} source={{uri: item?.image as string}} />
-        </View>
-      ))}
+      <Image
+        style={[styles.image, {width: size, height: size}]}
+        source={{uri: bubleGameResidents[0]?.image as string}}
+      />
     </View>
   );
 };
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     margin: SIZES.mainMargin,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: 30,
+    height: 30,
   },
 });
