@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {GameResident, LocationStateData, Resident} from '../types/residentType';
+import {LocationStateData} from '../types/residentType';
 
 export const initialState: LocationStateData = {
   gameResidents: [],
@@ -19,31 +19,17 @@ const locationSlice = createSlice({
       state.name = action.payload.name;
       state.residents = action.payload.residents;
     },
-    setLocationResidentsToStore: (state, action: PayloadAction<Resident[]>) => {
+    changeIsOpenInGameResidentById: (state, action: PayloadAction<string>) => {
       return {
         ...state,
-        residents: action.payload,
-      };
-    },
-    setLocationNameToStore: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        name: action.payload,
-      };
-    },
-    setGameResidentsToStore: (state, action: PayloadAction<GameResident[]>) => {
-      return {
-        ...state,
-        gameResidents: action.payload,
+        gameResidents: state.gameResidents.map(item =>
+          item.id === action.payload ? {...item, isOpen: !item.isOpen} : item,
+        ),
       };
     },
   },
 });
 
-export const {
-  setLocationDataToStore,
-  setLocationResidentsToStore,
-  setLocationNameToStore,
-  setGameResidentsToStore,
-} = locationSlice.actions;
+export const {setLocationDataToStore, changeIsOpenInGameResidentById} =
+  locationSlice.actions;
 export default locationSlice.reducer;

@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
-import {SIZES} from '../../styles';
+import Card from './Card';
+import {changeIsOpenInGameResidentById} from '../../store/locationSlice';
+import {useDispatch} from 'react-redux';
 
 interface CardGameContainerProps {
   cardGameResidents: GameResident[];
@@ -10,13 +12,15 @@ interface CardGameContainerProps {
 const CardGameContainer: React.FC<CardGameContainerProps> = ({
   cardGameResidents,
 }) => {
-  const size = Dimensions.get('window').width / 4 - SIZES.mainMargin * 2;
+  const dispatch = useDispatch();
+
+  const handleChangeIsOpen = (residentId: string) => {
+    dispatch(changeIsOpenInGameResidentById(residentId));
+  };
   return (
     <View style={styles.cardsContainer}>
       {cardGameResidents?.map(item => (
-        <View style={[styles.card, {width: size, height: size}]} key={item.id}>
-          <Image style={styles.image} source={{uri: item?.image as string}} />
-        </View>
+        <Card resident={item} handle={handleChangeIsOpen} key={item.id} />
       ))}
     </View>
   );
@@ -35,14 +39,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
-  },
-  card: {
-    overflow: 'hidden',
-    borderRadius: SIZES.radius,
-    margin: SIZES.mainMargin,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
   },
 });
