@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, Dimensions, StyleSheet, Image} from 'react-native';
 import {SIZES} from '../../styles';
 import {GameResident} from '../../types/residentType';
+import {useTheme} from '../../providers/ThemeProvider';
 
 interface CardProps {
   resident: GameResident;
@@ -14,15 +15,20 @@ const Card: React.FC<CardProps> = ({resident, handle}) => {
   const handleTouchStart = () => {
     handle(id as string);
   };
+  const {navigationThemeColor} = useTheme();
   return (
     <View
-      style={[styles.card, {width: size, height: size}]}
+      style={[
+        styles.card,
+        {width: size, height: size, backgroundColor: navigationThemeColor},
+      ]}
       onTouchStart={handleTouchStart}>
       <Image
         style={[
+          styles.hide,
           styles.image,
           isOpen ? styles.openImage : styles.closeImage,
-          {transform: [{rotate: isOpen ? '-45deg' : '0deg'}]},
+          {transform: [{translateX: isOpen ? 0 : 100}]},
         ]}
         source={{uri: image as string}}
       />
@@ -45,4 +51,7 @@ const styles = StyleSheet.create({
   },
   closeImage: {},
   openImage: {},
+  hide: {
+    // opacity: 0.5,
+  },
 });
