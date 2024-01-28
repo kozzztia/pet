@@ -23,13 +23,25 @@ const locationSlice = createSlice({
       return {
         ...state,
         gameResidents: state.gameResidents.map(item =>
-          item.id === action.payload ? {...item, isOpen: !item.isOpen} : item,
+          item.id === action.payload ? {...item, isOpen: true} : item,
         ),
+      };
+    },
+    closeAllIsOpenInGameResidents: state => {
+      return {
+        ...state,
+        gameResidents: state.gameResidents.map(item => ({
+          ...item,
+          isOpen: false,
+        })),
       };
     },
   },
 });
 
-export const {setLocationDataToStore, changeIsOpenInGameResidentById} =
-  locationSlice.actions;
+export const {
+  setLocationDataToStore,
+  changeIsOpenInGameResidentById,
+  closeAllIsOpenInGameResidents,
+} = locationSlice.actions;
 export default locationSlice.reducer;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Buble from './Buble';
+import {useState} from 'react';
 
 interface BubleGameContainerProps {
   bubleGameResidents: GameResident[];

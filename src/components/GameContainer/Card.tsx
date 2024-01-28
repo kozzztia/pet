@@ -6,14 +6,14 @@ import {useTheme} from '../../providers/ThemeProvider';
 
 interface CardProps {
   resident: GameResident;
-  handle: (residentId: string) => void;
+  handleIsOpen: (residentId: string) => void;
 }
 
-const Card: React.FC<CardProps> = ({resident, handle}) => {
+const Card: React.FC<CardProps> = ({resident, handleIsOpen}) => {
   const size = Dimensions.get('window').width / 4 - SIZES.mainMargin * 2;
   const {id, image, isOpen, name} = resident;
   const handleTouchStart = () => {
-    handle(id as string);
+    handleIsOpen(id as string);
   };
   const {navigationThemeColor} = useTheme();
   return (

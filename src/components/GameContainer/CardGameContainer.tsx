@@ -2,7 +2,10 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Card from './Card';
-import {changeIsOpenInGameResidentById} from '../../store/locationSlice';
+import {
+  changeIsOpenInGameResidentById,
+  closeAllIsOpenInGameResidents,
+} from '../../store/locationSlice';
 import {useDispatch} from 'react-redux';
 
 interface CardGameContainerProps {
@@ -20,7 +23,7 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
   return (
     <View style={styles.cardsContainer}>
       {cardGameResidents?.map(item => (
-        <Card resident={item} handle={handleChangeIsOpen} key={item.id} />
+        <Card key={item.id} resident={item} handleIsOpen={handleChangeIsOpen} />
       ))}
     </View>
   );
