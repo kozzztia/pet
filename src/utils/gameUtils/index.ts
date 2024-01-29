@@ -48,7 +48,7 @@ const blendedResidents = (residents: Resident[]): GameResident[] => {
         name: item.name,
         image: item.image,
         id: `${item.id}`,
-        isOpen: false,
+        isOpen: true,
       });
     });
   }
@@ -58,13 +58,13 @@ const blendedResidents = (residents: Resident[]): GameResident[] => {
         name: item.name,
         image: item.image,
         id: `${item.id}-original`,
-        isOpen: false,
+        isOpen: true,
       });
       copyResult.push({
         name: item.name,
         image: item.image,
         id: `${item.id}-copy`,
-        isOpen: false,
+        isOpen: true,
       });
     });
   }

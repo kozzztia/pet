@@ -38,9 +38,21 @@ const locationSlice = createSlice({
             : [action.payload],
       };
     },
+    changeIsOpenInResidents: (state, action: PayloadAction<string[]>) => {
+      const [id1, id2] = action.payload;
+      return {
+        ...state,
+        gameResidents: state.gameResidents.map(item =>
+          item.id === id1 || item.id === id2 ? {...item, isOpen: false} : item,
+        ),
+      };
+    },
   },
 });
 
-export const {setLocationDataToStore, setSelectResidentsToStore} =
-  locationSlice.actions;
+export const {
+  setLocationDataToStore,
+  setSelectResidentsToStore,
+  changeIsOpenInResidents,
+} = locationSlice.actions;
 export default locationSlice.reducer;

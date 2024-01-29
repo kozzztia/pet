@@ -2,6 +2,8 @@ import * as React from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import {SIZES} from '../../styles';
+import {RootState} from '../../store';
+import {useSelector} from 'react-redux';
 
 interface CardGameProps {
   cardGameResident: GameResident;
@@ -10,6 +12,7 @@ interface CardGameProps {
 
 const Card: React.FC<CardGameProps> = ({cardGameResident, cardHendler}) => {
   const size = Dimensions.get('window').width / 4 - SIZES.mainMargin * 2;
+  const {selectResidents} = useSelector((state: RootState) => state.location);
   const handler = () => {
     cardHendler(cardGameResident.id as string);
   };
@@ -17,10 +20,17 @@ const Card: React.FC<CardGameProps> = ({cardGameResident, cardHendler}) => {
     <View
       style={[styles.card, {width: size, height: size}]}
       onTouchEnd={handler}>
-      <Image
-        style={styles.image}
-        source={{uri: cardGameResident?.image as string}}
-      />
+      {cardGameResident.isOpen && (
+        <Image
+          style={[
+            styles.image,
+            selectResidents.includes(cardGameResident.id as string)
+              ? styles.open
+              : styles.close,
+          ]}
+          source={{uri: cardGameResident?.image as string}}
+        />
+      )}
     </View>
   );
 };
@@ -36,5 +46,11 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  open: {
+    opacity: 1,
+  },
+  close: {
+    opacity: 0.3,
   },
 });
