@@ -5,7 +5,14 @@ export const initialState: LocationStateData = {
   gameResidents: [],
   residents: [],
   name: '',
+  selectResidents: [],
 };
+
+interface setLocationDataToStoreType {
+  gameResidents: GameResident[];
+  residents: Resident[];
+  name: string;
+}
 
 const locationSlice = createSlice({
   name: 'location',
@@ -13,37 +20,27 @@ const locationSlice = createSlice({
   reducers: {
     setLocationDataToStore: (
       state,
-      action: PayloadAction<LocationStateData>,
+      action: PayloadAction<setLocationDataToStoreType>,
     ) => {
-      state.gameResidents = action.payload.gameResidents;
-      state.name = action.payload.name;
-      state.residents = action.payload.residents;
-    },
-    setLocationResidentsToStore: (state, action: PayloadAction<Resident[]>) => {
       return {
         ...state,
-        residents: action.payload,
+        gameResidents: action.payload.gameResidents,
+        name: action.payload.name,
+        residents: action.payload.residents,
       };
     },
-    setLocationNameToStore: (state, action: PayloadAction<string>) => {
+    setSelectResidentsToStore: (state, action: PayloadAction<string>) => {
       return {
         ...state,
-        name: action.payload,
-      };
-    },
-    setGameResidentsToStore: (state, action: PayloadAction<GameResident[]>) => {
-      return {
-        ...state,
-        gameResidents: action.payload,
+        selectResidents:
+          state.selectResidents.length < 2
+            ? [...state.selectResidents, action.payload]
+            : [action.payload],
       };
     },
   },
 });
 
-export const {
-  setLocationDataToStore,
-  setLocationResidentsToStore,
-  setLocationNameToStore,
-  setGameResidentsToStore,
-} = locationSlice.actions;
+export const {setLocationDataToStore, setSelectResidentsToStore} =
+  locationSlice.actions;
 export default locationSlice.reducer;

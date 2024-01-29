@@ -19,4 +19,5 @@ export interface LocationStateData {
   gameResidents: GameResident[];
   residents: Resident[];
   name: string;
+  selectResidents: string[];
 }
