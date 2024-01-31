@@ -8,10 +8,15 @@ import {useSelector} from 'react-redux';
 interface CardGameProps {
   cardGameResident: GameResident;
   cardHandler: (residentName: string) => void;
+  square: number;
 }
 
-const Card: React.FC<CardGameProps> = ({cardGameResident, cardHandler}) => {
-  const size = Dimensions.get('window').width / 4 - SIZES.mainMargin * 2;
+const Card: React.FC<CardGameProps> = ({
+  cardGameResident,
+  cardHandler,
+  square,
+}) => {
+  const size = Dimensions.get('window').width / square - SIZES.mainMargin * 2;
   const {selectResidents} = useSelector((state: RootState) => state.location);
   const [opacity] = React.useState(
     new Animated.Value(cardGameResident.isOpen ? 1 : 0),

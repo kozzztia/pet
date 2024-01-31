@@ -1,17 +1,17 @@
 import * as React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Card from './Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   changeIsOpenInResidents,
   clearSelectResidentsInStore,
-  setNewCardGame,
   setSelectResidentsToStore,
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
 import {useLayoutEffect} from 'react';
 import {CustomButton} from '../ui/Buttons';
+import {SIZES} from '../../styles';
 
 interface CardGameContainerProps {
   cardGameResidents: GameResident[];
@@ -37,9 +37,23 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
   return (
     <View style={styles.cardsContainer}>
       {cardGameResidents?.map(item => (
-        <Card cardHandler={handler} cardGameResident={item} key={item.id} />
+        <Card
+          cardHandler={handler}
+          cardGameResident={item}
+          key={item.id}
+          square={Math.sqrt(cardGameResidents.length)}
+        />
       ))}
-      <CustomButton handler={() => dispatch(setNewCardGame())} title="reset" />
+      <CustomButton
+        style={styles.restart}
+        // handler={() => dispatch(setNewCardGame())}
+        handler={() => console.log(cardGameResidents.length)}
+        title={
+          cardGameResidents.every(item => item.isOpen)
+            ? 'restart'
+            : 'play again'
+        }
+      />
     </View>
   );
 };
@@ -57,5 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
+  },
+  restart: {
+    marginTop: SIZES.mainMargin * 10,
   },
 });

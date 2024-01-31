@@ -19,8 +19,18 @@ const blended = <T>(array: T[]): T[] => {
       result.push(array[position[i]]);
     }
   }
-  if (array.length >= 8) {
+  if (array.length >= 8 && array.length < 18) {
     for (let i = 0; i < 8; i++) {
+      result.push(array[position[i]]);
+    }
+  }
+  if (array.length >= 18 && array.length < 32) {
+    for (let i = 0; i < 18; i++) {
+      result.push(array[position[i]]);
+    }
+  }
+  if (array.length >= 32) {
+    for (let i = 0; i < 32; i++) {
       result.push(array[position[i]]);
     }
   }
