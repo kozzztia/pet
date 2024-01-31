@@ -33,7 +33,7 @@ const locationSlice = createSlice({
       return {
         ...state,
         selectResidents:
-          state.selectResidents.length < 2
+          state.selectResidents.length < 2 && state.selectResidents
             ? [...state.selectResidents, action.payload]
             : [action.payload],
       };

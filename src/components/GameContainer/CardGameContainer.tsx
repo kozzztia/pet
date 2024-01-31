@@ -10,6 +10,7 @@ import {
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
 import {useLayoutEffect} from 'react';
+import {Title} from '../ui/Text';
 
 interface CardGameContainerProps {
   cardGameResidents: GameResident[];
@@ -22,7 +23,9 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
   const {selectResidents} = useSelector((state: RootState) => state.location);
 
   const handler = (residentId: string) => {
-    dispatch(setSelectResidentsToStore(residentId as string));
+    selectResidents.includes(residentId)
+      ? dispatch(clearSelectResidentsInStore())
+      : dispatch(setSelectResidentsToStore(residentId as string));
   };
   useLayoutEffect(() => {
     selectResidents.length === 2 &&
