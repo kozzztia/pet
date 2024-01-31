@@ -10,7 +10,6 @@ import {
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
 import {useLayoutEffect} from 'react';
-import {Title} from '../ui/Text';
 
 interface CardGameContainerProps {
   cardGameResidents: GameResident[];
