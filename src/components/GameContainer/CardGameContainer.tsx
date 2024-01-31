@@ -1,15 +1,17 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Card from './Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   changeIsOpenInResidents,
   clearSelectResidentsInStore,
+  setNewCardGame,
   setSelectResidentsToStore,
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
 import {useLayoutEffect} from 'react';
+import {CustomButton} from '../ui/Buttons';
 
 interface CardGameContainerProps {
   cardGameResidents: GameResident[];
@@ -37,6 +39,7 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
       {cardGameResidents?.map(item => (
         <Card cardHandler={handler} cardGameResident={item} key={item.id} />
       ))}
+      <CustomButton handler={() => dispatch(setNewCardGame())} title="reset" />
     </View>
   );
 };

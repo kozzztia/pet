@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {GameResident, LocationStateData, Resident} from '../types/residentType';
+import { blendedResidents } from '../utils/gameUtils';
 
 export const initialState: LocationStateData = {
   gameResidents: [],
@@ -44,6 +45,13 @@ const locationSlice = createSlice({
         selectResidents: [],
       };
     },
+    setNewCardGame: state => {
+      return {
+        ...state,
+        gameResidents: blendedResidents(state.residents),
+        selectResidents: [],
+      };
+    },
     changeIsOpenInResidents: (state, action: PayloadAction<string[]>) => {
       const [id1, id2] = action.payload;
       return {
@@ -57,6 +65,7 @@ const locationSlice = createSlice({
 });
 
 export const {
+  setNewCardGame,
   setLocationDataToStore,
   setSelectResidentsToStore,
   clearSelectResidentsInStore,
