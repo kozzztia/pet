@@ -38,6 +38,12 @@ const locationSlice = createSlice({
             : [action.payload],
       };
     },
+    clearSelectResidentsInStore: state => {
+      return {
+        ...state,
+        selectResidents: [],
+      };
+    },
     changeIsOpenInResidents: (state, action: PayloadAction<string[]>) => {
       const [id1, id2] = action.payload;
       return {
@@ -53,6 +59,7 @@ const locationSlice = createSlice({
 export const {
   setLocationDataToStore,
   setSelectResidentsToStore,
+  clearSelectResidentsInStore,
   changeIsOpenInResidents,
 } = locationSlice.actions;
 export default locationSlice.reducer;

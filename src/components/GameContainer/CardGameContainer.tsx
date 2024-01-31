@@ -5,6 +5,7 @@ import Card from './Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   changeIsOpenInResidents,
+  clearSelectResidentsInStore,
   setSelectResidentsToStore,
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
@@ -32,7 +33,7 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
   return (
     <View style={styles.cardsContainer}>
       {cardGameResidents?.map(item => (
-        <Card cardHendler={handler} cardGameResident={item} key={item.id} />
+        <Card cardHandler={handler} cardGameResident={item} key={item.id} />
       ))}
     </View>
   );

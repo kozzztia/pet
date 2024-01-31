@@ -1,37 +1,48 @@
 import * as React from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {Image, StyleSheet, Dimensions, Animated} from 'react-native';
 import {GameResident} from '../../types/residentType';
-import {SIZES} from '../../styles';
+import {COLORS, SIZES} from '../../styles';
 import {RootState} from '../../store';
 import {useSelector} from 'react-redux';
 
 interface CardGameProps {
   cardGameResident: GameResident;
-  cardHendler: (residentName: string) => void;
+  cardHandler: (residentName: string) => void;
 }
 
-const Card: React.FC<CardGameProps> = ({cardGameResident, cardHendler}) => {
+const Card: React.FC<CardGameProps> = ({cardGameResident, cardHandler}) => {
   const size = Dimensions.get('window').width / 4 - SIZES.mainMargin * 2;
   const {selectResidents} = useSelector((state: RootState) => state.location);
+  const [opacity] = React.useState(
+    new Animated.Value(cardGameResident.isOpen ? 1 : 0),
+  );
+
+  React.useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: cardGameResident.isOpen ? 1 : 0,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+  }, [cardGameResident.isOpen, opacity]);
+
   const handler = () => {
-    cardHendler(cardGameResident.id as string);
+    cardHandler(cardGameResident.id as string);
   };
+
   return (
-    <View
-      style={[styles.card, {width: size, height: size}]}
+    <Animated.View
+      style={[styles.card, {width: size, height: size, opacity: opacity}]}
       onTouchEnd={handler}>
-      {cardGameResident.isOpen && (
-        <Image
-          style={[
-            styles.image,
-            selectResidents.includes(cardGameResident.id as string)
-              ? styles.open
-              : styles.close,
-          ]}
-          source={{uri: cardGameResident?.image as string}}
-        />
-      )}
-    </View>
+      <Image
+        style={[
+          styles.image,
+          selectResidents.includes(cardGameResident.id as string)
+            ? styles.open
+            : styles.close,
+        ]}
+        source={{uri: cardGameResident?.image as string}}
+      />
+    </Animated.View>
   );
 };
 
@@ -42,6 +53,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: SIZES.radius,
     margin: SIZES.mainMargin,
+    backgroundColor: COLORS.decorColor,
   },
   image: {
     width: '100%',
@@ -51,6 +63,6 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   close: {
-    opacity: 0.3,
+    opacity: 0,
   },
 });
