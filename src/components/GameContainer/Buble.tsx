@@ -12,7 +12,13 @@ const Buble: React.FC<BubleResidentProps> = ({resident}) => {
   return (
     <Image
       style={[styles.image, {width: size, height: size}]}
-      source={{uri: resident?.image as string}}
+      source={
+        resident?.image
+          ? {
+              uri: resident?.image as string,
+            }
+          : require('../../assets/image/start.png')
+      }
     />
   );
 };

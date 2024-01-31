@@ -1,3 +1,3 @@
 export const getRundomSize = (): number => {
-  return Math.floor(Math.random() * 20 + 20);
+  return Math.floor(Math.random() * 40 + 40);
 };

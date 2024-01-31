@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   changeIsOpenInResidents,
   clearSelectResidentsInStore,
+  setNewCardGame,
   setSelectResidentsToStore,
 } from '../../store/locationSlice';
 import {RootState} from '../../store';
@@ -46,10 +47,9 @@ const CardGameContainer: React.FC<CardGameContainerProps> = ({
       ))}
       <CustomButton
         style={styles.restart}
-        // handler={() => dispatch(setNewCardGame())}
-        handler={() => console.log(cardGameResidents.length)}
+        handler={() => dispatch(setNewCardGame())}
         title={
-          cardGameResidents.every(item => item.isOpen)
+          cardGameResidents.find(item => item.isOpen !== false)
             ? 'restart'
             : 'play again'
         }
