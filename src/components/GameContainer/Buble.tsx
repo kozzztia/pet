@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {getRundomSize} from '../../utils/gameUtils/bubleGameUtils';
 import {GameResident} from '../../types/residentType';
+import {COLORS} from '../../styles';
 
 interface BubleResidentProps {
   resident: GameResident;
@@ -28,5 +29,6 @@ export default Buble;
 const styles = StyleSheet.create({
   image: {
     borderRadius: 50,
+    backgroundColor: COLORS.decorColor,
   },
 });
