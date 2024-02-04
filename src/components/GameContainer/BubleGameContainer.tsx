@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Buble from './Buble';
+import {getRundomImageIndex} from '../../utils/gameUtils/bubleGameUtils';
 
 interface BubleGameContainerProps {
   bubleGameResidents: GameResident[];
@@ -10,9 +11,16 @@ interface BubleGameContainerProps {
 const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
   bubleGameResidents,
 }) => {
+  const rundomIndex = getRundomImageIndex(bubleGameResidents.length);
+  const handler = () => {
+    console.log(rundomIndex);
+  };
   return (
     <View style={styles.cardsContainer}>
-      <Buble resident={bubleGameResidents[0]} />
+      <Buble
+        resident={bubleGameResidents[rundomIndex]}
+        bubleHandler={() => handler()}
+      />
     </View>
   );
 };
