@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import Buble from './Buble';
 import {getRundomImageIndex} from '../../utils/gameUtils/bubleGameUtils';
@@ -28,20 +28,28 @@ const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
     }
   };
   const [clickedCount, setClickedCount] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState(60);
   const rundomIndex = getRundomImageIndex(bubleGameResidents.length);
   const handler = () => {
     setClickedCount(prev => prev + 1);
-    console.log(containerDimensions);
+  };
+  const timeLeftHandler = () => {
+    setTimeLeft(prev => prev - 1);
   };
   return (
-    <View style={styles.cardsContainer} ref={containerRef} onLayout={onLayout}>
-      {/* <Timer />
-      <Title title={clickedCount.toString()} /> */}
-      <Buble
-        positions={containerDimensions}
-        resident={bubleGameResidents[rundomIndex]}
-        bubleHandler={() => handler()}
-      />
+    <View style={styles.gameContainer}>
+      <Timer timeLeftCount={timeLeft} timeLeftHandler={timeLeftHandler} />
+      <Title title={clickedCount.toString()} />
+      <View
+        style={styles.cardsContainer}
+        ref={containerRef}
+        onLayout={onLayout}>
+        <Buble
+          positions={containerDimensions}
+          resident={bubleGameResidents[rundomIndex]}
+          bubleHandler={() => handler()}
+        />
+      </View>
     </View>
   );
 };
@@ -49,10 +57,15 @@ const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
 export default BubleGameContainer;
 
 const styles = StyleSheet.create({
+  gameContainer: {
+    flex: 1,
+    flexShrink: 1,
+    width: '100%',
+    padding: 20,
+  },
   cardsContainer: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'red',
   },
   image: {
     borderRadius: 50,

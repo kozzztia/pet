@@ -2,6 +2,10 @@ import React from 'react';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {GameResident} from '../../types/residentType';
 import {COLORS} from '../../styles';
+import {
+  getRundomPosition,
+  getRundomSize,
+} from '../../utils/gameUtils/bubleGameUtils';
 
 interface BubleResidentProps {
   resident: GameResident;
@@ -17,16 +21,19 @@ const Buble: React.FC<BubleResidentProps> = ({
   bubleHandler,
   positions,
 }) => {
+  const size = getRundomSize(30, 40);
+  const widthPosition = getRundomPosition(positions.width, size);
+  const heightPosition = getRundomPosition(positions.height, size);
   return (
     <TouchableOpacity onPressIn={bubleHandler}>
       <Image
         style={[
           styles.image,
           {
-            width: 20,
-            height: 20,
-            left: positions.width - 20,
-            top: positions.height - 20,
+            width: size,
+            height: size,
+            left: widthPosition,
+            top: heightPosition,
           },
         ]}
         source={
