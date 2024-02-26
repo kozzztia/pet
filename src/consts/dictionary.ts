@@ -25,5 +25,8 @@ export const dictionary = {
   game: {
     btnMore: 'Residents',
     btnGame: 'Game',
+    scoreTitle: 'your score is',
+    timeTitle: 'time left',
+    resetTitle: 'reset',
   },
 };
