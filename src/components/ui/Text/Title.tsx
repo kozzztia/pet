@@ -11,7 +11,11 @@ type titleProps = {
 const Title: React.FC<titleProps> = ({title, style}) => {
   const {titleThemeColor} = useTheme();
   return (
-    <Text style={[styles.title, style, {color: titleThemeColor}]}>{title}</Text>
+    <Text
+      numberOfLines={1}
+      style={[styles.title, style, {color: titleThemeColor}]}>
+      {title}
+    </Text>
   );
 };
 
@@ -23,5 +27,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     padding: SIZES.mainPadding,
     textTransform: 'capitalize',
+    maxWidth: '80%',
+    overflow: 'hidden',
   },
 });
