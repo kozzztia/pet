@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {GameResident, LocationStateData, Resident} from '../types/residentType';
-import { blendedResidents } from '../utils/gameUtils';
+import {blendedResidents} from '../utils/gameUtils';
 
 export const initialState: LocationStateData = {
   gameResidents: [],

@@ -27,6 +27,7 @@ export const dictionary = {
     btnGame: 'Game',
     scoreTitle: 'your score is',
     timeTitle: 'time left',
-    resetTitle: 'reset',
+    startTitle: 'start',
+    emptyScore: 'Zero score for now',
   },
 };
