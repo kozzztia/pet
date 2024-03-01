@@ -1,24 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Title} from '../ui/Text';
 import {dictionary} from '../../consts/dictionary';
 
-interface TimerProps {
-  timeLeftCount: number;
-  timeLeftHandler: () => void;
-}
-
-const Timer: React.FC<TimerProps> = ({timeLeftHandler, timeLeftCount}) => {
+const Timer: React.FC = () => {
   const {timeTitle} = dictionary.game;
+  const [leftTime, setLeftTime] = useState<number>(60);
   useEffect(() => {
     const timer = setInterval(() => {
-      timeLeftHandler();
+      setLeftTime(prev => prev - 1);
     }, 1000);
-    if (timeLeftCount === 0) {
+    if (leftTime === 0) {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [timeLeftCount, timeLeftHandler]);
-  return <Title title={`${timeTitle} : ${timeLeftCount.toString()}`} />;
+  }, [leftTime]);
+  return <Title title={`${timeTitle} : ${leftTime}`} />;
 };
 
 export default Timer;

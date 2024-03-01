@@ -21,7 +21,7 @@ const Buble: React.FC<BubleResidentProps> = ({
   bubleHandler,
   positions,
 }) => {
-  const size = getRundomSize(30, 40);
+  const size = getRundomSize(40, 50);
   const widthPosition = getRundomPosition(positions.width, size);
   const heightPosition = getRundomPosition(positions.height, size);
   return (

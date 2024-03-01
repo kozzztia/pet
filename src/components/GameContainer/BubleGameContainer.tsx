@@ -5,9 +5,6 @@ import Buble from './Buble';
 import {getRundomImageIndex} from '../../utils/gameUtils/bubleGameUtils';
 import {useRef, useState} from 'react';
 import Timer from '../BubleTimer/Timer';
-import {Title} from '../ui/Text';
-import {dictionary} from '../../consts/dictionary';
-import {CustomButton} from '../ui/Buttons';
 
 interface BubleGameContainerProps {
   bubleGameResidents: GameResident[];
@@ -16,7 +13,6 @@ interface BubleGameContainerProps {
 const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
   bubleGameResidents,
 }) => {
-  const {scoreTitle, resetTitle} = dictionary.game;
   const containerRef = useRef<View>(null);
   const [containerDimensions, setContainerDimensions] = useState<{
     width: number;
@@ -31,37 +27,24 @@ const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
     }
   };
   const [clickedCount, setClickedCount] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState(60);
+
   const rundomIndex = getRundomImageIndex(bubleGameResidents.length);
-  const handler = () => {
+  const bubleHandler = () => {
     setClickedCount(prev => prev + 1);
-  };
-  const timeLeftHandler = () => {
-    setTimeLeft(prev => prev - 1);
-  };
-  const resetHandler = () => {
-    setTimeLeft(60);
   };
   return (
     <View style={styles.gameContainer}>
-      <Timer timeLeftCount={timeLeft} timeLeftHandler={timeLeftHandler} />
-      {timeLeft === 0 ? (
-        <View style={styles.restartContainer}>
-          <Title title={`${scoreTitle} ${clickedCount}`} />
-          <CustomButton handler={resetHandler} title={resetTitle} />
-        </View>
-      ) : (
-        <View
-          style={styles.cardsContainer}
-          ref={containerRef}
-          onLayout={onLayout}>
-          <Buble
-            positions={containerDimensions}
-            resident={bubleGameResidents[rundomIndex]}
-            bubleHandler={() => handler()}
-          />
-        </View>
-      )}
+      <Timer />
+      <View
+        style={styles.cardsContainer}
+        ref={containerRef}
+        onLayout={onLayout}>
+        <Buble
+          positions={containerDimensions}
+          resident={bubleGameResidents[rundomIndex]}
+          bubleHandler={() => bubleHandler()}
+        />
+      </View>
     </View>
   );
 };
