@@ -14,7 +14,7 @@ const Timer: React.FC<TimerProps> = ({timerHandler}) => {
 
   const handleReset = async () => {
     timerHandler(false);
-    setLeftTime(10);
+    setLeftTime(60);
   };
   useEffect(() => {
     const timer = setInterval(() => {
