@@ -33,7 +33,7 @@ const Timer: React.FC<TimerProps> = ({timerHandler}) => {
       style={styles.timerButton}
     />
   ) : (
-    <Title title={`${timeTitle} : ${leftTime}`} />
+    <Title title={`${timeTitle} : ${leftTime}`} style={styles.timer} />
   );
 };
 
@@ -42,5 +42,9 @@ export default Timer;
 const styles = StyleSheet.create({
   timerButton: {
     marginTop: 'auto',
+  },
+  timer: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });

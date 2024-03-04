@@ -42,6 +42,7 @@ const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
   };
   return (
     <View style={styles.gameContainer}>
+      <Timer timerHandler={timerHandler} />
       {timeIsOver ? (
         <View
           style={styles.cardsContainer}
@@ -58,7 +59,6 @@ const BubleGameContainer: React.FC<BubleGameContainerProps> = ({
           title={`${scoreTitle} : ${clickedCount ? clickedCount : emptyScore}`}
         />
       )}
-      <Timer timerHandler={timerHandler} />
     </View>
   );
 };
